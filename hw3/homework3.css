@@ -1,0 +1,42 @@
+body {
+    font-family: Georgia;
+    background-color: black;
+}
+
+#main-box{
+    background-color: rgb(242,242,242);
+    margin: 30px 50px 50px;
+    padding: 30px 50px 50px;
+}
+
+#inner-box{
+    background-color: white;
+    width: 350px;
+    padding: 20px;
+}
+
+#remind-me-later {
+    background-color: darkgray;
+    color: lightgray;
+    font-size: 20px;
+    height: 38px;
+    width: 200px;
+}
+
+#save-and-continue {
+    background-color: purple;
+    color: whitesmoke;
+    font-size: 20px;
+    height: 38px;
+    width: 200px;
+}
+
+
+
+.select{
+    background-color:white;
+    color:rgb(156,158,162);
+    height: 38px;
+    width: 260px;
+    font-size: 15px;
+}
