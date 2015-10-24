@@ -17,6 +17,7 @@ function viewXML(what) {
          return xmlDoc;
      }
     var xmlDoc = loadXML();
+    var html_text = generateHTML(xmlDoc);
 
     if (window.ActiveXObject) {
         if (xmlDoc.parseError.errorCode != 0) {
@@ -30,7 +31,6 @@ function viewXML(what) {
             hWin.document.write(heml_text);
         }
     } else {
-        var html_text = generateHTML(xmlDoc);
         var hWin = window.open("", "Assignment4", "height=800, width=600");
         hWin.document.write(html_text);
     }
@@ -41,8 +41,8 @@ function viewXML(what) {
 function generateHTML(xmlDoc) {
     var ELEMENT_NODE = 1;
     var root = xmlDoc.DocumentElement;
-    var html_text = "<html><head><tittle>XML Parse Result</tittle></head><body>";
-    html_text += "<table border='2'>";
+    var html_text = "<html style='text-align:center;'><head><tittle>XML Parse Result</tittle></head><body>";
+    html_text += "<table border='2' align='center'>";
 
     var listings = xmlDoc.childNodes[0].childNodes;
     html_text += "<tbody>";
