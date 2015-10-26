@@ -6,10 +6,10 @@ function viewXML(what) {
          var url = what.URL.value;
          // For IE7+, Firfox, CHrome, Opera, Safari
          if (window.XMLHttpRequest) {
-             xmlhttp = new XMLHttpRequest();
+             var xmlhttp = new XMLHttpRequest();
          } else {
              // For IE6, IE5
-             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+             var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
          }
          xmlhttp.open("GET", url, false);
          xmlhttp.send();
@@ -28,7 +28,7 @@ function viewXML(what) {
         } else {
             generateHTML(xmlDoc);
             hWin = window.open("", "Assignment4", "height=800, width=600");
-            hWin.document.write(heml_text);
+            hWin.document.write(html_text);
         }
     } else {
         var hWin = window.open("", "Assignment4", "height=800, width=600");
@@ -52,7 +52,7 @@ function generateHTML(xmlDoc) {
         if (listing.length == 0) {
             continue;
         }
-        html_text += "<tr><th colspan='7'>Listing</th></tr><tr>"
+        html_text += "<tr><th colspan='7'>Listing</th></tr><tr>";
         for (j = 0; j < listing.length; j++) {
             if (listing[j].nodeName == "Location") {
                 var location = listing[j].childNodes;
@@ -68,9 +68,9 @@ function generateHTML(xmlDoc) {
                 if (details.length == 0) {
                     continue;
                 }
-                html_text += "<th>Details</th>"
+                html_text += "<th>Details</th>";
                 html_text += parseTable(details);
-                html_text += "</tr>"
+                html_text += "</tr>";
             }
         }
         html_text += "</tr>";
@@ -96,7 +96,7 @@ function parseTable(arr) {
         }
     }
     ans += "</tr><tr><th></th>";
-    for (var i = 0; i < arr.length; i++) {
+    for (i = 0; i < arr.length; i++) {
         if (arr[i].firstChild == null) {
             continue;
         }
