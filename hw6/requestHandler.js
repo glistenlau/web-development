@@ -12,22 +12,29 @@ var fs = require('fs');
 var startTime;
 
 exports.handleQuery = function(queries, callback) {
-
-    queryGeocode(queries, function(err, location) {
+    queryToDict(queries, function(err, infoDict) {
         if (err) {
             return callback(err);
         }
 
-        queryForecast(location, function(err, weather) {
+        queryGeocode(infoDict, function(err, location) {
             if (err) {
                 return callback(err);
             }
-            return callback(null, weather);
-        })
+
+            queryForecast(infoDict, location, function(err, weather) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, weather);
+            })
+        });
     });
+
+
 };
 
-var queryToDict = function(queries) {
+var queryToDict = function(queries, callback) {
     var dict = {};
     var list = queries.split('&');
     for (var query of list) {
@@ -35,11 +42,10 @@ var queryToDict = function(queries) {
         dict[keyValue[0]] = keyValue[1];
     }
 
-    return dict;
+    return callback(null, dict);
 };
 
-var queryGeocode = function(queries, callback) {
-    let infoDict = queryToDict(queries);
+var queryGeocode = function(infoDict, callback) {
     let geoUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + infoDict.streetAddress + "," + infoDict.city + "," + infoDict.state + "&key=" + GOOGLE_KEY;
 
     https.get(geoUrl, function(res) {
@@ -51,41 +57,40 @@ var queryGeocode = function(queries, callback) {
 
         res.on('end', function() {
             xml2js.parseString(xmlRes, function(err, result) {
-                callback(result.GeocodeResponse.result[0].geometry[0].location[0]);
+                return callback(null, result.GeocodeResponse.result[0].geometry[0].location[0]);
             });
         });
 
     }).on("error", function(err) {
-        console.error(err);
+        return callback(err);
     });
 };
 
-var queryForecast = function(location, callback) {
-    let fcUrl =
+var queryForecast = function(infoDict, location, callback) {
+    let fcUrl = "https://api.forecast.io/forecast/473660d9a99fc4416b3d36a8a93b7ad7/" + location.lat[0] + "," + location.lng[0] + "?units=" + infoDict.degreeType + "&exclude=flags";
     let jsonStr = "";
     https.get(fcUrl, function(res) {
         console.log("responseSatus: ", res.statusCode);
         console.log("forecast response spend time: ", new Date().getTime() - startTime);
         res.on('data', function(data) {
             jsonStr += data;
-        })
+        });
 
         res.on('end', function() {
             //let weather = JSON.parse(jsonStr);
             console.log("forecast spend time: ", new Date().getTime() - startTime);
-            response.writeHead(200, {"Content-Type": "application/json"})
-            response.write(jsonStr);
-            response.end();
-        })
+            callback(null, jsonStr);
+        });
+    }).on("error", function(err) {
+        return callback(err);
     });
 };
 
-exports.handleHome = function(res) {
+exports.handleHome = function(res, callback) {
     fs.readFile("./forecast_search.html", 'utf-8', function(err, data) {
         if (err) {
-            throw err;
+            return callback(err);
         }
-
-
+        return callback(null, data);
     });
 };
