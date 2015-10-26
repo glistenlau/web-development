@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--check the input validation-->
+    <script>
+        function checkInput() {
+            var form = document.forms.myForm;
+            if (form.streetAddress.value === "") {
+                alert("Please enter value for Street Address.");
+                form.streetAddress.focus();
+                return false;
+            }
+            if (form.city.value === "") {
+                alert("Please enter value for City.");
+                form.city.focus();
+                return false;
+            }
+            if (form.state.value === "") {
+                alert("Please select your state.");
+                form.state.focus();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+    <title>Forcast Search</title>
+</head>
+<body>
+<div align="center">
+    <h2>Forcast Search</h2>
+    <!--if input valid send form information to server.-->
+    <form  name="myForm" onsubmit="return checkInput(this.form)" action="/" method="GET" id="location">
+        <table style="border: 2px #000000 solid;">
+
+            <!--enter street address-->
+            <tr>
+                <td>Street Address:*</td>
+                <td><input type="text" name="streetAddress" maxlength="255" size="30" /></td>
+            </tr>
+
+            <!--enter city-->
+            <tr>
+                <td>City:*</td>
+                <td><input type="text" name="city" max="255" size="30" /></td>
+            </tr>
+
+            <!--select state-->
+            <tr>
+                <td>State:*</td>
+                <td>
+                    <select name="state">
+                        <option value="">Select your state...</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">MI</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </td>
+            </tr>
+
+            <!--select degree type-->
+            <tr>
+                <td>Degree:*</td>
+                <td>
+                    <input type="radio" name="degreeType" value="us" checked="checked" />
+                    Fahrenheit
+                    <input type="radio" name="degreeType" value="si" />
+                    Celsius
+                </td>
+            </tr>
+
+            <!--buttons-->
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="search" value="Search" />
+                    <input type="reset" name="clear" value="Clear" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
