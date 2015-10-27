@@ -36,7 +36,7 @@ exports.handleQuery = function(queries, callback) {
                     return callback(err);
                 }
 
-                showHTML(weather, function(err, HTML) {
+                showHTML(infoDict, weather, function(err, HTML) {
                     if (err) {
                         return callback(err);
                     }
@@ -65,7 +65,9 @@ var queryGeocode = function(infoDict, callback) {
         infoDict.city + "," + infoDict.state + "&key=" + GOOGLE_KEY;
 
     https.get(geoUrl, function(res) {
-        var xmlRes = "";
+        var xmlRes = ""
+
+        console.log("Google Geocode responseSatus: ", res.statusCode);
 
         res.on('data', function(data) {
             xmlRes += data.toString();
@@ -86,15 +88,13 @@ var queryForecast = function(infoDict, location, callback) {
     let fcUrl = "https://api.forecast.io/forecast/473660d9a99fc4416b3d36a8a93b7ad7/" + location.lat[0] + "," + location.lng[0] + "?units=" + infoDict.degreeType + "&exclude=flags";
     let jsonStr = "";
     https.get(fcUrl, function(res) {
-        console.log("responseSatus: ", res.statusCode);
-        console.log("forecast response spend time: ", new Date().getTime() - startTime);
+        console.log("Forecast.io responseSatus: ", res.statusCode);
         res.on('data', function(data) {
             jsonStr += data;
         });
 
         res.on('end', function() {
             //let weather = JSON.parse(jsonStr);
-            console.log("forecast spend time: ", new Date().getTime() - startTime);
             callback(null, JSON.parse(jsonStr));
         });
     }).on("error", function(err) {
@@ -102,12 +102,15 @@ var queryForecast = function(infoDict, location, callback) {
     });
 };
 
-var showHTML = function(weather, callback) {
+var showHTML = function(infoDict, weather, callback) {
     fs.readFile("./weather.html", "utf-8", function(err, data) {
         if (err) {
             return callback(err);
         }
-        let icon = "/images/clear.png";
+        let icon = getIcon(weather.currently.icon);
+        //noinspection JSValidateTypes
+        let temperature = weather.currently.temperature + (infoDict.degreeType === "us"? " Fº": " Cº");
+        let condition = weather.currently.summary;
 
         let e = [
             getPrecipitation(weather.currently.precipIntensity),
@@ -120,7 +123,7 @@ var showHTML = function(weather, callback) {
             getTime(weather.daily.data[0].sunsetTime)
         ];
 
-        let HTML = String.format(data, e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], icon);
+        let HTML = String.format(data, e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], icon, condition, temperature);
         return callback(null, HTML);
     })
 }
@@ -146,6 +149,22 @@ var getTime = function(time) {
     let sign = t.getHours() >= 12? "PM": "AM";
 
     return ("00" + hour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + sign;
+};
+
+var getIcon = function(icon) {
+    switch(icon) {
+        case "clear-day": return "/images/clear.png";
+        case "clear-night": return "/images/clear_night.png";
+        case "rain": return "/images/rain.png";
+        case "snow": return "/images/snow.png";
+        case "sleet": return "/images/sleet.png";
+        case "wind": return "/images/wind.png";
+        case "fog": return "/images/fog.png";
+        case "cloudy": return "/images/cloudy.png";
+        case "partly-cloudy-day": return "/images/cloud_day.png";
+        case "partly-cloudy-night": return "images/cloud_night.png";
+        default: return "/#";
+    }
 }
 
 exports.handleHome = function(res, callback) {
