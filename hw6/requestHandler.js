@@ -5,11 +5,10 @@
 'use strict';
 
 const GOOGLE_KEY= "AIzaSyDdhosspZ6NYYHaBIDtMsLtPBGD-j5FRGU";
+var fs = require('fs');
 var https = require('https');
 var xml2js = require('xml2js');
 var querystring = require('querystring');
-var fs = require('fs');
-var startTime;
 
 exports.handleImage = function(path, callback) {
     fs.readFile("." + path, function(err, data) {
@@ -51,11 +50,10 @@ exports.handleQuery = function(queries, callback) {
                     }
 
                     return callback(null, HTML);
-                })
-            })
+                });
+            });
         });
     });
-
 };
 
 var queryToDict = function(queries, callback) {
@@ -135,8 +133,8 @@ var showHTML = function(infoDict, weather, callback) {
 
         let HTML = String.format(data, e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], icon, condition, temperature);
         return callback(null, HTML);
-    })
-}
+    });
+};
 
 var getPrecipitation = function(pi) {
     if (pi === 0) {
@@ -150,7 +148,7 @@ var getPrecipitation = function(pi) {
     } else {
         return "Heavy";
     }
-}
+};
 
 var getTime = function(time) {
     let t = new Date(time * 1000);
