@@ -17,7 +17,11 @@
         $.validator.setDefaults({
             submitHandler: function() {
                 alert("submitted!");
+                $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
+                    alert(data);
+                });
             }
+
         });
 
         $.validator.addMethod("noEmptyInput", function(value, element, params) {
@@ -33,8 +37,8 @@
             $("#searchForm").validate({
                 rules: {
                     streetAddress: "noEmptyInput",
-                    city: "required",
-                    state: "required"
+                    city: "noEmptyInput",
+                    state: "noEmptyInput"
                 },
                 messages: {
                     streetAddress: "Please enter the street address",
@@ -43,12 +47,14 @@
                 }
             });
         });
+
+
     </script>
 
     <title>Forecast Search</title>
 </head>
 <body>
-<form name="searchForm" id="searchForm" onsubmit="" action="/api/forecast/" method="get">
+<form name="searchForm" id="searchForm" onsubmit="" action="javascript:alert('success!')" method="get">
     <table border="1">
         <tr><th colspan="6">Forecast Search</th></tr>
         <tr>
