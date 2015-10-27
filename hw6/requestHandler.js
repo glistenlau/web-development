@@ -20,6 +20,15 @@ exports.handleImage = function(path, callback) {
     });
 };
 
+exports.handleHome = function(callback) {
+    fs.readFile("./forecast_search.html", 'utf-8', function(err, data) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null, data);
+    });
+};
+
 exports.handleQuery = function(queries, callback) {
     queryToDict(queries, function(err, infoDict) {
         if (err) {
@@ -85,7 +94,8 @@ var queryGeocode = function(infoDict, callback) {
 };
 
 var queryForecast = function(infoDict, location, callback) {
-    let fcUrl = "https://api.forecast.io/forecast/473660d9a99fc4416b3d36a8a93b7ad7/" + location.lat[0] + "," + location.lng[0] + "?units=" + infoDict.degreeType + "&exclude=flags";
+    let fcUrl = "https://api.forecast.io/forecast/473660d9a99fc4416b3d36a8a93b7ad7/" + location.lat[0] + "," +
+        location.lng[0] + "?units=" + infoDict.degreeType + "&exclude=flags";
     let jsonStr = "";
     https.get(fcUrl, function(res) {
         console.log("Forecast.io responseSatus: ", res.statusCode);
@@ -165,15 +175,6 @@ var getIcon = function(icon) {
         case "partly-cloudy-night": return "images/cloud_night.png";
         default: return "/#";
     }
-}
-
-exports.handleHome = function(res, callback) {
-    fs.readFile("./forecast_search.html", 'utf-8', function(err, data) {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, data);
-    });
 };
 
 String.format = function(src){

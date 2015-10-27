@@ -24,7 +24,7 @@ var server = http.createServer(function (request, response) {
             response.end();
         })
     } else if (queries === null || queries === "") {
-        requestHandler.handleHome(response, function(err, html) {
+        requestHandler.handleHome(function(err, html) {
             if (err) {
                 return console.error(err);
             }
