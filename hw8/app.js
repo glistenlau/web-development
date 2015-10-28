@@ -37,7 +37,7 @@ var server = http.createServer(function (request, response) {
             if (err) {
                 return console.error(err);
             }
-            response.writeHead(200, {"Content-Type": "image/png"});
+            response.writeHead(200, {"Content-Type": "image"});
             response.write(image);
             response.end();
         })

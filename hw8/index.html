@@ -2,15 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <style>
+        body {
+            background: url(/api/image?fileName=bg.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        #search {
+            background: #000;
+            background-color: rgba(0,0,0,0.3);
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+            margin: 5%;
+            padding: 2%;
+        }
+        .row.no-gutter {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row.no-gutter [class*='col-']:not(:first-child),
+        .row.no-gutter [class*='col-']:not(:last-child) {
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
     <script>
 
@@ -43,7 +66,7 @@
                 messages: {
                     streetAddress: "Please enter the street address",
                     city: "Please enter the city",
-                    state: "please select a state"
+                    state: "Please select a state"
                 }
             });
         });
@@ -54,19 +77,21 @@
     <title>Forecast Search</title>
 </head>
 <body>
-<form name="searchForm" id="searchForm" onsubmit="" action="javascript:alert('success!')" method="get">
-    <table border="1">
-        <tr><th colspan="6">Forecast Search</th></tr>
-        <tr>
-            <td><label for="streetAddress">Street Address:*</label></td>
-            <td>City:*</td>
-            <td>State:*</td>
-        </tr>
-        <tr>
-            <td rowspan="2"><input type="text" id="streetAddress" name="streetAddress" placeholder="Enter Street address"></td>
-            <td rowspan="2"><input type="text" id="city" name="city" placeholder="Enter the city name"></td>
-            <td rowspan="2">
-                <select name="state">
+<h2 align="center">Forecast Search</h2>
+<div id="search">
+    <form name="searchForm" id="searchForm" role="form" action="javascript:alert('success!')" method="get">
+        <div class="row no-gutter">
+            <div class="form-group col-xs-12 col-md-3">
+                <label class="control-label" for="streetAddress">Street Address:*</label>
+                <input type="text" class="form-control" name="streetAddress" id="streetAddress" placeholder="Enter street address"/>
+            </div>
+            <div class="form-group col-xs-12 col-md-2">
+                <label class="control-label" for="city">City:*</label>
+                <input type="text" class="form-control" name="city" id="city" placeholder="Enter the city name"/>
+            </div>
+            <div class="form-group col-xs-12 col-md-2">
+                <label class="control-label" for="state">State:*</label>
+                <select id="state" name="state" class="form-control">
                     <option value="">Select your state...</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -120,22 +145,60 @@
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                 </select>
-            </td>
-            <td>Degree:*</td>
-            <td rowspan="2" width="300"></td>
-            <td rowspan="2" align="right">
-                <input type="submit" value="Search" />
-                <input type="reset" value="Clear" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="radio" name="degreeType" value="us" checked="checked" />Fahrenheit
-                <input type="radio" name="degreeType" value="si" />Celsius
-            </td>
-        </tr>
-    </table>
-</form>
+            </div>
+            <div class="form-group col-xs-12 col-md-2">
+                <div class="row">
+                    <div class="form-group col-xs-0 col-md-12"></div>
+                    <div class="col-xs-12 col-md-12">
+                        <label class="control-label">Degree:</label>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <input type="radio" name="degreeType" id="us" value="us" checked="checked" />  Fahrenheit
+                        <input type="radio" name="degreeType" id="si" value="si" />  Celsius
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-3" align="right">
+                <div class="row">
+                    <div class="form-group col-xs-0 col-md-12"></div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                            Search
+                        </button>
+                        <button type="reset" class="btn btn-default">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr style="margin: 4%;"/>
+
+<div id="result" class="container-fluid" style="margin: 0">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#now">Right Now</a></li>
+        <li><a data-toggle="tab" href="#hours">Next 24 hours</a></li>
+        <li><a data-toggle="tab" href="#days">Next 7 Days</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="now" class="tab-pane fade in active">
+        </div>
+
+        <div id="hours" class="tab-pane fade">
+            Next 24 Hours
+        </div>
+
+        <div id="days" class="tab-pane fade">
+            Next 7 Days
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
