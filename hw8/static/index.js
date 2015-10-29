@@ -31,15 +31,19 @@ var getIcon = function(icon) {
 $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
-            var city = $("input#city").val();
             var location = $("input#city").val() + ", " + $("select#state").val();
+            var degreeType = $("input:radio[name=degreeType]").val() === "us"? "ºF": "ºC";
             var nowInfo = [];
             nowInfo.push(getIcon(data.currently.icon));
             nowInfo.push(data.currently.summary + " in " + location);
             nowInfo.push(parseInt(data.currently.temperature));
             nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | " + parseInt(data.daily.data[0].temperatureMin) + "º");
+            nowInfo.push()
             $("#nowIcon").attr("src", nowInfo[0]);
-            $("#location").text(nowInfo[1]);
+            $("#nowLocation").text(nowInfo[1]);
+            $("#nowTemp").text(nowInfo[2]);
+            $(".degreeType").text(degreeType);
+            $("#nowRange").text(nowInfo[3]);
             $("div#result").show()
         });
     }

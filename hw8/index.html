@@ -116,7 +116,7 @@
 
 <hr style="margin: 4%;"/>
 
-<div id="result" hidden style="margin: 5%">
+<div id="result" style="margin: 5%">
     <ul class="nav nav-tabs" id="resultTab">
         <li class="active"><a data-toggle="tab" href="#now">Right Now</a></li>
         <li><a data-toggle="tab" href="#hours">Next 24 hours</a></li>
@@ -136,13 +136,14 @@
                         <!--For the temperature information-->
                         <div class="col-xs-12 col-md-6" align="center">
                             <div class="row">
-                                <div id="location" class="col-md-12">
+                                <div id="nowLocation" class="col-md-12">
                                     Location
                                 </div>
+                                <div clearfix></div>
                                 <div class="col-md-12">
-                                    <h1>Temperature</h1>
+                                    <span id="nowTemp" style="text-align: center">70</span><sup class="degreeType" style="position: relative; top: -48px; font-size: 24px">ºF</sup>
                                 </div>
-                                <div class="col-md-12">
+                                <div id="nowRange" class="col-md-12">
                                     LH+fb
                                 </div>
                             </div>

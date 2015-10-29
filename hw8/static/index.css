@@ -29,12 +29,17 @@ div {
 }
 
 .odd {
+    color: black;
     background-color: pink;
     padding: 5px 5px 5px 20px;
 }
 .even {
+    color: black;
     background-color: white;
     padding: 5px 5px 5px 20px;
+}
+#nowTemp {
+    font-size: 96px;
 }
 #resultTab li a {
     background-color: whitesmoke;
