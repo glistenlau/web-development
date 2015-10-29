@@ -10,19 +10,31 @@ var https = require('https');
 var xml2js = require('xml2js');
 var querystring = require('querystring');
 
-exports.handleImage = function(query, callback) {
-    queryToDict(query, function(err, infoDict) {
-        if (err) {
-            return callback(err);
+exports.handleStatic = function(pathname, callback) {
+        let postfix = pathname.substring(pathname.indexOf(".") + 1);
+        let type = "";
+        switch (postfix) {
+            case "css":
+                type = "text/css";
+                break;
+            case "js":
+                type = "text/javascript";
+                break;
+            case "jpg":
+                type = "image/jpg";
+                break;
+            case "png":
+                type = "image/png";
+                break;
+            default:
+                return callback(Error());
         }
-        fs.readFile("./images/" + infoDict.fileName, function(err, data) {
+        fs.readFile("." + pathname, function(err, data) {
             if (err) {
                 return callback(err);
             }
-            return callback(null, data);
+            return callback(null, data, type);
         });
-
-    });
 
 };
 

@@ -32,18 +32,17 @@ var server = http.createServer(function (request, response) {
             response.write(weather);
             response.end();
         });
-    } else if (pathname === "/api/image") {
-        requestHandler.handleImage(queries, function(err, image) {
-            if (err) {
-                return console.error(err);
-            }
-            response.writeHead(200, {"Content-Type": "image"});
-            response.write(image);
-            response.end();
-        })
     } else {
-        response.statusCode = 404;
-        response.end();
+        requestHandler.handleStatic(pathname, function(err, image, type) {
+            if (err) {
+                response.statusCode = 404;
+                response.end();
+            } else {
+                response.writeHead(200, {"Content-Type": type});
+                response.write(image);
+                response.end();
+            }
+        })
     }
 });
 

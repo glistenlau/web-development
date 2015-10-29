@@ -1,0 +1,45 @@
+body {
+    background: url(/static/images/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+div {
+    color: white;
+}
+
+#search {
+    background: #000;
+    background-color: rgba(0,0,0,0.3);
+
+    margin: 5%;
+    padding: 2%;
+}
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.odd {
+    background-color: pink;
+    padding: 5px 5px 5px 20px;
+}
+.even {
+    background-color: white;
+    padding: 5px 5px 5px 20px;
+}
+#resultTab li a {
+    background-color: whitesmoke;
+}
+#resultTab li.active a {
+    background-color: #428BCA;
+    color: white;
+}
