@@ -1,17 +1,45 @@
 /**
  * Created by YiLIU on 10/28/15.
  */
+var getIcon = function(icon) {
+    var path = "/static/images/";
+    switch (icon) {
+        case "clear-day":
+            return path + "clear.png";
+        case "clear-night":
+            return path + "clear_night.png";
+        case "rain":
+            return path + "rain.png";
+        case "snow":
+            return path + "snow.png";
+        case "sleet":
+            return path + "sleet.png";
+        case "wind":
+            return path + "wind.png";
+        case "fog":
+            return path + "fog.png";
+        case "cloudy":
+            return path + "cloudy.png";
+        case "partly-cloudy-day":
+            return path + "cloud_day.png";
+        case "partly-cloudy-night":
+            return path + "cloud_night.png";
+    }
+
+};
+
 $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
             var city = $("input#city").val();
             var location = $("input#city").val() + ", " + $("select#state").val();
             var nowInfo = [];
-            //nowInfo.append(getIcon(data.currently.summary));
+            nowInfo.push(getIcon(data.currently.icon));
             nowInfo.push(data.currently.summary + " in " + location);
             nowInfo.push(parseInt(data.currently.temperature));
             nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | " + parseInt(data.daily.data[0].temperatureMin) + "º");
-            $("#location").text(nowInfo[0]);
+            $("#nowIcon").attr("src", nowInfo[0]);
+            $("#location").text(nowInfo[1]);
             $("div#result").show()
         });
     }
