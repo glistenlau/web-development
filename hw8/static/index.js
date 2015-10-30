@@ -28,6 +28,37 @@ var getIcon = function(icon) {
 
 };
 
+var createWeatherMap = function(lon, lat) {
+    var lonlat = new OpenLayers.LonLat(lon, lat);
+
+    var map = new OpenLayers.Map("map");
+// Create OSM overlays
+    var mapnik = new OpenLayers.Layer.OSM();
+
+    var layer_cloud = new OpenLayers.Layer.XYZ(
+        "clouds",
+        "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
+        {
+            isBaseLayer: false,
+            opacity: 0.7,
+            sphericalMercator: true
+        }
+    );
+
+    var layer_precipitation = new OpenLayers.Layer.XYZ(
+        "precipitation",
+        "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
+        {
+            isBaseLayer: false,
+            opacity: 0.7,
+            sphericalMercator: true
+        }
+    );
+
+
+    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
+};
+
 $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
@@ -44,6 +75,8 @@ $.validator.setDefaults({
             $("#nowTemp").text(nowInfo[2]);
             $(".degreeType").text(degreeType);
             $("#nowRange").text(nowInfo[3]);
+            createWeatherMap(data.longitude, data.latitude);
+
             $("div#result").show()
         });
     }

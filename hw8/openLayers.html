@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tiled ArcGIS MapServer example</title>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.10.1/build/ol.js"></script>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="map" class="map" style="width: 400px;height: 400px;"></div>
+        </div>
+    </div>
+
+</div>
+<script>
+    var lonlat = new OpenLayers.LonLat(0, 0);
+
+    var map = new OpenLayers.Map("map");
+    // Create OSM overlays
+    var mapnik = new OpenLayers.Layer.OSM();
+
+    var layer_cloud = new OpenLayers.Layer.XYZ(
+            "clouds",
+            "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
+            {
+                isBaseLayer: false,
+                opacity: 0.7,
+                sphericalMercator: true
+            }
+    );
+
+    var layer_precipitation = new OpenLayers.Layer.XYZ(
+            "precipitation",
+            "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
+            {
+                isBaseLayer: false,
+                opacity: 0.7,
+                sphericalMercator: true
+            }
+    );
+
+
+    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
+
+</script>
+</body>
+</html>

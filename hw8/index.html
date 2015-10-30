@@ -9,6 +9,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="/static/index.js"></script>
 
     <title>Forecast Search</title>
@@ -128,9 +130,9 @@
             <div class="row">
                 <!--For the weather information table-->
                 <div class="col-xs-12 col-md-6">
-                    <div class="row" style="background-color: orange">
+                    <div class="row" style="background-color: palevioletred">
                         <!--For the weather icon-->
-                        <div class="col-xs-12 col-md-6" align="center">
+                        <div class="col-xs-12 col-md-6" align="center" style="padding: 10px">
                             <image id="nowIcon" src="/static/images/clear.png" width="200px" height="200px"></image>
                         </div>
                         <!--For the temperature information-->
@@ -170,8 +172,7 @@
 
                     </div>
                 </div>
-                <div class="hidden-xs col-md-6">
-                    TemperatureTemperatureTemperatureTemperatureTemperature
+                <div id="map" class="col-xs-12 col-md-6">
                 </div>
             </div>
 
@@ -186,6 +187,10 @@
         </div>
     </div>
 </div>
+<script>
+    //Center of map
+
+</script>
 
 </body>
 </html>
