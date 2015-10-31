@@ -43,9 +43,9 @@ var getPrecipitation = function(pi) {
 };
 
 var getTime = function(time) {
-    let t = new Date(time * 1000);
-    let hour = t.getHours();
-    let minute = t.getMinutes();
+    var t = new Date(time * 1000);
+    var hour = t.getHours();
+    var minute = t.getMinutes();
 
     if (hour === 0) {
         ansHour = 12;
@@ -78,19 +78,26 @@ $.validator.setDefaults({
             nowInfo.push(parseInt(data.currently.temperature));
             nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | " + parseInt(data.daily.data[0].temperatureMin) + "º");
             nowInfo.push(getPrecipitation(data.currently.precipIntensity));
-            nowInfo.push((weather.currently.precipProbability * 100) + "%");
-            nowInfo.push(parseInt(weather.currently.windSpeed) + "mph");
-            nowInfo.push(parseInt(weather.currently.dewPoint));
-            nowInfo.push((weather.currently.humidity * 100) + "%");
-            nowInfo.push(parseInt(weather.currently.visibility) + "mi");
-            nowInfo.push(getTime(weather.daily.data[0].sunriseTime));
-            nowInfo.push(getTime(weather.daily.data[0].sunsetTime));
+            nowInfo.push((data.currently.precipProbability * 100) + "%");
+            nowInfo.push(parseInt(data.currently.windSpeed) + "mph");
+            nowInfo.push(parseInt(data.currently.dewPoint));
+            nowInfo.push((data.currently.humidity * 100) + "%");
+            nowInfo.push(parseInt(data.currently.visibility) + "mi");
+            nowInfo.push(getTime(data.daily.data[0].sunriseTime));
+            nowInfo.push(getTime(data.daily.data[0].sunsetTime));
             $("#nowIcon").attr("src", nowInfo[0]);
             $("#nowLocation").text(nowInfo[1]);
             $("#nowTemp").text(nowInfo[2]);
             $(".degreeType").text(degreeType);
             $("#nowRange").text(nowInfo[3]);
             $("#nowPc").text(nowInfo[4]);
+            $("#nowChanceRain").text(nowInfo[5]);
+            $("#nowWindSpeed").text(nowInfo[6]);
+            $("#nowDewPoint").text(nowInfo[7]);
+            $("#nowHumidity").text(nowInfo[8]);
+            $("#nowVisibility").text(nowInfo[9]);
+            $("#nowSunrise").text(nowInfo[10]);
+            $("#nowSunset").text(nowInfo[11]);
             lonlat = new OpenLayers.LonLat(data.longitude, data.latitude);
             map.setCenter(lonlat.transform('EPSG:4326', 'EPSG:3857'), 10);
 
