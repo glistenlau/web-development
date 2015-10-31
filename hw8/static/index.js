@@ -28,76 +28,44 @@ var getIcon = function(icon) {
 
 };
 
-//var createWeatherMap = function(lon, lat) {
-//    var map = new ol.Map({
-//        view: new ol.View({
-//            center: ol.proj.transform([-96.7128718, 33.0306995], 'EPSG:4326', 'EPSG:3857'),
-//            zoom: 12
-//        }),
-//        layers: [
-//            new ol.layer.Tile({
-//                source: new ol.source.OSM()
-//            }),
-//            new ol.layer.Tile({
-//                source: new ol.source.XYZ(
-//                    "clouds",
-//                    "http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png",
-//                    {
-//                        isBaseLayer: false,
-//                        opacity: 0.7,
-//                        sphericalMercator: true
-//                    }
-//                )
-//            }),
-//            new ol.layer.Tile({
-//                source: new OpenLayers.Layer.XYZ(
-//                    "precipitation",
-//                    "http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png",
-//                    {
-//                        isBaseLayer: false,
-//                        opacity: 0.7,
-//                        sphericalMercator: true
-//                    }
-//                )
-//            })
-//
-//    ],
-//    target: 'map'
-//});
-    //Center of map
-//    var lonlat = new OpenLayers.LonLat(lon, lat);
-//
-//    var map = new OpenLayers.Map({
-//        div: "map",
-//        center: lonlat.transform('EPSG:4326', 'EPSG:3857'),
-//    });
-//    // Create OSM overlays
-//    var mapnik = new OpenLayers.Layer.OSM();
-//
-//    var layer_cloud = new OpenLayers.Layer.XYZ(
-//        "clouds",
-//        "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
-//        {
-//            isBaseLayer: false,
-//            opacity: 0.7,
-//            sphericalMercator: true
-//        }
-//    );
-//
-//    var layer_precipitation = new OpenLayers.Layer.XYZ(
-//        "precipitation",
-//        "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
-//        {
-//            isBaseLayer: false,
-//            opacity: 0.7,
-//            sphericalMercator: true
-//        }
-//    );
-//
-//
-//    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
-//};
+var getPrecipitation = function(pi) {
+    if (pi === 0) {
+        return "None";
+    } else if (pi === 0.002) {
+        return "Very Light";
+    } else if (pi === 0.017) {
+        return "Light";
+    } else if (pi === 0.1) {
+        return "Moderate";
+    } else {
+        return "Heavy";
+    }
+};
 
+var getTime = function(time) {
+    let t = new Date(time * 1000);
+    let hour = t.getHours();
+    let minute = t.getMinutes();
+
+    if (hour === 0) {
+        ansHour = 12;
+    } else if (hour > 12) {
+        ansHour = hour - 12;
+    } else {
+        ansHour = hour;
+    }
+
+    if (hour === 24) {
+        ansSign = "AM";
+    } else if (hour > 11) {
+        ansSign = "PM";
+    } else {
+        ansSign = "AM";
+    }
+
+
+    return ("00" + ansHour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + ansSign;
+};
 
 $.validator.setDefaults({
     submitHandler: function() {
@@ -109,14 +77,22 @@ $.validator.setDefaults({
             nowInfo.push(data.currently.summary + " in " + location);
             nowInfo.push(parseInt(data.currently.temperature));
             nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | " + parseInt(data.daily.data[0].temperatureMin) + "º");
-            nowInfo.push()
+            nowInfo.push(getPrecipitation(data.currently.precipIntensity));
+            nowInfo.push((weather.currently.precipProbability * 100) + "%");
+            nowInfo.push(parseInt(weather.currently.windSpeed) + "mph");
+            nowInfo.push(parseInt(weather.currently.dewPoint));
+            nowInfo.push((weather.currently.humidity * 100) + "%");
+            nowInfo.push(parseInt(weather.currently.visibility) + "mi");
+            nowInfo.push(getTime(weather.daily.data[0].sunriseTime));
+            nowInfo.push(getTime(weather.daily.data[0].sunsetTime));
             $("#nowIcon").attr("src", nowInfo[0]);
             $("#nowLocation").text(nowInfo[1]);
             $("#nowTemp").text(nowInfo[2]);
             $(".degreeType").text(degreeType);
             $("#nowRange").text(nowInfo[3]);
+            $("#nowPc").text(nowInfo[4]);
             lonlat = new OpenLayers.LonLat(data.longitude, data.latitude);
-            map.setCenter(lonlat.transform('EPSG:4326', 'EPSG:3857'), 12);
+            map.setCenter(lonlat.transform('EPSG:4326', 'EPSG:3857'), 10);
 
             $("div#result").show()
         });
