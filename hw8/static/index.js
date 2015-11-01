@@ -160,3 +160,8 @@ $().ready(function() {
         }
     });
 });
+
+var resetResult = function(form) {
+    form.reset();
+    $("#result").hide();
+}
