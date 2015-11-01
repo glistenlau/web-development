@@ -101,15 +101,26 @@ var setNow = function(data, degreeType) {
 var setNextHours = function(data, degreeType) {
     var table = $("#nextHours");
     table.empty();
-    table.append('<tr><th>Time</th><th>Summary</th><th>Cloud Cover</th><th>Temp (<span class="degreeType"></span>)</th><th>View Details</th></tr>');
+    table.append('<tr id="nextHoursTH"><th class="wh">Time</th><th class="wh">Summary</th><th class="wh">Cloud Cover' +
+        '</th><th class="wh">Temp (<span class="degreeType"></span>)</th><th class="wh">View Details</th></tr>');
     for (var i = 1; i <= 24; i++) {
         var time = getTime(data.hourly.data[i].time);
         var summary = "<image src=" + getIcon(data.hourly.data[i].icon) + " width='30px' height='30px'/>";
         var cloudCover = parseInt(data.hourly.data[i].cloudCover) + "%";
         var temp = data.hourly.data[i].temperature;
-        var viewMore = "<span class='glyphicon glyphicon-plus'></span>";
-        table.append("<tr><td>" + time + "</td><td>" + summary + "</td><td>" + cloudCover + "</td><td>" + temp + "</td><td>" + viewMore + "</td></tr>")
+        var viewMore = '<a role="button" data-toggle="collapse" href="#hour' + i +
+            '" aria-expanded="false" aria-controls="' + 'hour' + i + '"><span class="glyphicon glyphicon-plus"></span></a>';
+        table.append("<tr><td>" + time + "</td><td>" + summary + "</td><td>" + cloudCover + "</td><td>" + temp +
+            "</td><td>" + viewMore + "</td></tr>");
+        var windSpeed = data.hourly.data[i].windSpeed + (degreeType === "us"? " mph": " m/s");
+        var humidity = data.hourly.data[i].humidity + "%";
+        var visibility = data.hourly.data[i].visibility + (degreeType === "us"? " mi": " km");
+        var pressure = data.hourly.data[i].pressure + (degreeType === "us"? " mb": " hPa");
 
+        table.append('<tr class="collapse well" id="hour' + i + '"><td colspan="5"><table class="table table-hover" style="color: black;">' +
+            '<tr><th>Wind</th><th>Humidity</th><th>Visibility</th><th>Pressure</th></tr>' +
+            '<tr><td>' + windSpeed +'</td><td>' + humidity + '</td><td>' + visibility + '</td><td>' + pressure + '</td></tr>' +
+            '</table></td></tr>');
     }
 };
 
