@@ -10,6 +10,10 @@ div {
     color: white;
 }
 
+th {
+    text-align: center;
+}
+
 #search {
     background: #000;
     background-color: rgba(0,0,0,0.3);
@@ -39,7 +43,7 @@ div {
     padding: 5px 5px 5px 20px;
 }
 #nowTemp {
-    font-size: 96px;
+    font-size: 128px;
 }
 #resultTab li a {
     background-color: whitesmoke;
