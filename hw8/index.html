@@ -92,8 +92,8 @@
                         <label class="control-label">Degree:</label>
                     </div>
                     <div class="form-group col-xs-12 col-md-12">
-                        <input type="radio" name="degreeType" id="us" value="us" checked="checked" />  Fahrenheit
-                        <input type="radio" name="degreeType" id="si" value="si" />  Celsius
+                        <input type="radio" name="degreeType" value="us" checked="checked" />  Fahrenheit
+                        <input type="radio" name="degreeType" value="si" />  Celsius
                     </div>
                 </div>
             </div>
@@ -143,9 +143,9 @@
                                 </div>
                                 <div clearfix></div>
                                 <div class="col-md-12">
-                                    <span id="nowTemp" style="text-align: center">70</span><sup class="degreeType" style="position: relative; top: -48px; font-size: 24px">ºF</sup>
+                                    <span id="nowTemp" style="text-align: center">70</span><span id="degreeType" style="position: relative; top: -48px; font-size: 24px"></span>
                                 </div>
-                                <div id="nowRange" class="col-md-12">
+                                <div id="nowRange" style="text-align: center" class="col-md-12">
                                     LH+fb
                                 </div>
                             </div>

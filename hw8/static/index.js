@@ -71,24 +71,24 @@ $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
             var location = $("input#city").val() + ", " + $("select#state").val();
-            var degreeType = $("input:radio[name=degreeType]").val() === "us"? "ºF": "ºC";
+            var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             var nowInfo = [];
             nowInfo.push(getIcon(data.currently.icon));
             nowInfo.push(data.currently.summary + " in " + location);
             nowInfo.push(parseInt(data.currently.temperature));
-            nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | " + parseInt(data.daily.data[0].temperatureMin) + "º");
+            nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | L: " + parseInt(data.daily.data[0].temperatureMin) + "º");
             nowInfo.push(getPrecipitation(data.currently.precipIntensity));
             nowInfo.push((data.currently.precipProbability * 100) + "%");
-            nowInfo.push(parseInt(data.currently.windSpeed) + "mph");
-            nowInfo.push(parseInt(data.currently.dewPoint));
+            nowInfo.push(parseInt(data.currently.windSpeed) + (degreeType === "us"? " mph": " m/s"));
+            nowInfo.push(parseInt(data.currently.dewPoint) + (degreeType === "us"? " ºF": " ºC"));
             nowInfo.push((data.currently.humidity * 100) + "%");
-            nowInfo.push(parseInt(data.currently.visibility) + "mi");
+            nowInfo.push(parseInt(data.currently.visibility) + (degreeType === "us"? " mi": " km"));
             nowInfo.push(getTime(data.daily.data[0].sunriseTime));
             nowInfo.push(getTime(data.daily.data[0].sunsetTime));
             $("#nowIcon").attr("src", nowInfo[0]);
             $("#nowLocation").text(nowInfo[1]);
             $("#nowTemp").text(nowInfo[2]);
-            $(".degreeType").text(degreeType);
+            $("#degreeType").text(degreeType === "us"? " ºF":" ºC");
             $("#nowRange").text(nowInfo[3]);
             $("#nowPc").text(nowInfo[4]);
             $("#nowChanceRain").text(nowInfo[5]);
