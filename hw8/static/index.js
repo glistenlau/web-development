@@ -1,7 +1,7 @@
 /**
  * Created by YiLIU on 10/28/15.
  */
-var getIcon = function(icon) {
+var getIcon = function (icon) {
     var path = "/static/images/";
     switch (icon) {
         case "clear-day":
@@ -28,7 +28,7 @@ var getIcon = function(icon) {
 
 };
 
-var getPrecipitation = function(pi) {
+var getPrecipitation = function (pi) {
     if (pi === 0) {
         return "None";
     } else if (pi === 0.002) {
@@ -42,7 +42,7 @@ var getPrecipitation = function(pi) {
     }
 };
 
-var getTime = function(time) {
+var getTime = function (time) {
     var t = new Date(time * 1000);
     var hour = t.getHours();
     var minute = t.getMinutes();
@@ -67,7 +67,7 @@ var getTime = function(time) {
     return ("00" + ansHour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + ansSign;
 };
 
-var getDateInfo = function(time) {
+var getDateInfo = function (time) {
     var nextSeven = [];
     for (var i = 1; i <= 7; i++) {
         var t = new Date(time * 1000);
@@ -82,7 +82,7 @@ var getDateInfo = function(time) {
     return nextSeven;
 };
 
-var getLiteralDay = function(day) {
+var getLiteralDay = function (day) {
     switch (day) {
         case 0:
             return "Sunday";
@@ -98,10 +98,11 @@ var getLiteralDay = function(day) {
             return "Friday";
         case 6:
             return "Saturday";
-    };
+    }
+    ;
 };
 
-var getLiteralMonth = function(month) {
+var getLiteralMonth = function (month) {
     switch (month) {
         case 0:
             return "Jan";
@@ -130,7 +131,7 @@ var getLiteralMonth = function(month) {
     }
 }
 
-var setNow = function(data, degreeType) {
+var setNow = function (data, degreeType) {
     var nowInfo = [];
     nowInfo.push(getIcon(data.currently.icon));
     nowInfo.push(data.currently.summary + " in " + data.address);
@@ -139,10 +140,10 @@ var setNow = function(data, degreeType) {
         parseInt(data.daily.data[0].temperatureMin) + "º");
     nowInfo.push(getPrecipitation(data.currently.precipIntensity));
     nowInfo.push((data.currently.precipProbability * 100) + "%");
-    nowInfo.push(parseInt(data.currently.windSpeed) + (degreeType === "us"? " mph": " m/s"));
-    nowInfo.push(parseInt(data.currently.dewPoint) + (degreeType === "us"? " ºF": " ºC"));
+    nowInfo.push(parseInt(data.currently.windSpeed) + (degreeType === "us" ? " mph" : " m/s"));
+    nowInfo.push(parseInt(data.currently.dewPoint) + (degreeType === "us" ? " ºF" : " ºC"));
     nowInfo.push((data.currently.humidity * 100) + "%");
-    nowInfo.push(parseInt(data.currently.visibility) + (degreeType === "us"? " mi": " km"));
+    nowInfo.push(parseInt(data.currently.visibility) + (degreeType === "us" ? " mi" : " km"));
     nowInfo.push(getTime(data.daily.data[0].sunriseTime));
     nowInfo.push(getTime(data.daily.data[0].sunsetTime));
     $("#nowIcon").attr("src", nowInfo[0]);
@@ -161,35 +162,64 @@ var setNow = function(data, degreeType) {
     map.setCenter(lonlat.transform('EPSG:4326', 'EPSG:3857'), 10);
 };
 
-var setNextHours = function(data, degreeType) {
+var setNextHours = function (data, degreeType) {
     var table = $("#nextHours");
     table.empty();
-    table.append('<tr id="nextHoursTH"><th class="wh">Time</th><th class="wh">Summary</th><th class="wh">Cloud Cover' +
-        '</th><th class="wh">Temp (<span class="degreeType"></span>)</th><th class="wh">View Details</th></tr>');
+    table.append(
+        '<tr id="nextHoursTH">' +
+        '<th class="wh">Time</th>' +
+        '<th class="wh">Summary</th>' +
+        '<th class="wh">Cloud Cover</th>' +
+        '<th class="wh">Temp (<span class="degreeType"></span>)</th>' +
+        '<th class="wh">View Details</th>' +
+        '</tr>');
     for (var i = 1; i <= 24; i++) {
         var time = getTime(data.hourly.data[i].time);
-        var summary = "<image src=" + getIcon(data.hourly.data[i].icon) + " width='30px' height='30px'/>";
+        var summary = "<image src=" + getIcon(data.hourly.data[i].icon) + " width='35px' height='35px'/>";
         var cloudCover = parseInt(data.hourly.data[i].cloudCover) + "%";
         var temp = data.hourly.data[i].temperature;
-        var viewMore = '<a role="button" data-toggle="collapse" href="#hour' + i +
-            '" aria-expanded="false" aria-controls="' + 'hour' + i +
-            '"><span class="glyphicon glyphicon-plus"></span></a>';
-        table.append("<tr><td>" + time + "</td><td>" + summary + "</td><td>" + cloudCover + "</td><td>" + temp +
-            "</td><td>" + viewMore + "</td></tr>");
-        var windSpeed = data.hourly.data[i].windSpeed + (degreeType === "us"? " mph": " m/s");
+        var viewMore =
+            '<a role="button" data-toggle="collapse" href="#hour' + i + '" aria-expanded="false" aria-controls="' +
+            'hour' + i + '">' +
+            '<span class="glyphicon glyphicon-plus"></span>' +
+            '</a>';
+        table.append(
+            "<tr>" +
+            "<td>" + time + "</td>" +
+            "<td>" + summary + "</td>" +
+            "<td>" + cloudCover + "</td>" +
+            "<td>" + temp + "</td>" +
+            "<td>" + viewMore + "</td>" +
+            "</tr>");
+        var windSpeed = data.hourly.data[i].windSpeed + (degreeType === "us" ? " mph" : " m/s");
         var humidity = data.hourly.data[i].humidity + "%";
-        var visibility = data.hourly.data[i].visibility + (degreeType === "us"? " mi": " km");
-        var pressure = data.hourly.data[i].pressure + (degreeType === "us"? " mb": " hPa");
+        var visibility = data.hourly.data[i].visibility + (degreeType === "us" ? " mi" : " km");
+        var pressure = data.hourly.data[i].pressure + (degreeType === "us" ? " mb" : " hPa");
 
-        table.append('<tr class="collapse well" id="hour' + i +
-            '"><td colspan="5"><table class="table table-hover" style="color: black;">' +
-            '<tr><th>Wind</th><th>Humidity</th><th>Visibility</th><th>Pressure</th></tr>' +
-            '<tr><td>' + windSpeed +'</td><td>' + humidity + '</td><td>' + visibility +
-            '</td><td>' + pressure + '</td></tr></table></td></tr>');
+        table.append(
+            '<tr class="collapse well" id="hour' + i + '">' +
+            '<td colspan="5">' +
+            '<table class="table table-hover" style="color: black;">' +
+            '<tr>' +
+            '<th>Wind</th>' +
+            '<th>Humidity</th>' +
+            '<th>Visibility</th>' +
+            '<th>Pressure</th>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>' + windSpeed + '</td>' +
+            '<td>' + humidity + '</td>' +
+            '<td>' + visibility +
+            '</td>' +
+            '<td>' + pressure + '</td>' +
+            '</tr>' +
+            '</table>' +
+            '</td>' +
+            '</tr>');
     }
 };
 
-var setNextDays = function(data, degreeType) {
+var setNextDays = function (data, degreeType) {
     var nextSeven = getDateInfo(data.currently.time);
     var daysTab = $("#daysRow");
     var emptyRowBefore = $("<div></div>")
@@ -272,19 +302,19 @@ var setNextDays = function(data, degreeType) {
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Wind Speed</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].windSpeed + (degreeType === "us"? " mph": " m/s") + '</div>' +
+            '<div style="color: black">' + data.daily.data[i].windSpeed + (degreeType === "us" ? " mph" : " m/s") + '</div>' +
             '</div>');
 // add visibility
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Visibility</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].visibility + (degreeType === "us"? " mi": " km") + '</div>' +
+            '<div style="color: black">' + data.daily.data[i].visibility + (degreeType === "us" ? " mi" : " km") + '</div>' +
             '</div>');
 // add pressure
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Pressure</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].pressure + (degreeType === "us"? " mb": " hpa") + '</div>' +
+            '<div style="color: black">' + data.daily.data[i].pressure + (degreeType === "us" ? " mb" : " hpa") + '</div>' +
             '</div>');
         // append row to modal body
         modalBody.append(modalRow);
@@ -303,28 +333,28 @@ var setNextDays = function(data, degreeType) {
 }
 
 $.validator.setDefaults({
-    submitHandler: function() {
-        $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
+    submitHandler: function () {
+        $.get("/api/weather", $("form#searchForm").serialize(), function (data) {
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             var address = data.address.split(',');
-            if (address.length - 2 >=0) {
+            if (address.length - 2 >= 0) {
                 var temp = address[address.length - 2].split(' ');
-                data.address = temp.length > 1? temp[1]: temp[0];
+                data.address = temp.length > 1 ? temp[1] : temp[0];
             }
-            if (address.length - 3 >=0) {
+            if (address.length - 3 >= 0) {
                 data.address = address[address.length - 3].trim() + ", " + data.address;
             }
             setNow(data, degreeType);
             setNextHours(data, degreeType);
             setNextDays(data, degreeType);
-            $(".degreeType").text(degreeType === "us"? "ºF":"ºC");
+            $(".degreeType").text(degreeType === "us" ? "ºF" : "ºC");
             $("div#result").css('visibility', 'visible');
         });
     }
 
 });
 
-$.validator.addMethod("noEmptyInput", function(value, element, params) {
+$.validator.addMethod("noEmptyInput", function (value, element, params) {
     value = value.trim();
     if (value.length < 1) {
         return false;
@@ -333,7 +363,7 @@ $.validator.addMethod("noEmptyInput", function(value, element, params) {
     return true;
 });
 
-$().ready(function() {
+$().ready(function () {
     $("#searchForm").validate({
         rules: {
             streetAddress: "noEmptyInput",
@@ -348,7 +378,7 @@ $().ready(function() {
     });
 });
 
-var resetResult = function(form) {
+var resetResult = function (form) {
     form.reset();
     $("div#result").css('visibility', 'hidden');
 };
