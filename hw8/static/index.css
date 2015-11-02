@@ -58,9 +58,20 @@ label.error {
 
 .daysBlock {
     margin: 10px 0 10px 0;
-    padding: 5px;
+    padding: 3px;
     border-radius: 5px;
 }
+
+.modalBlock {
+    margin: 10px 0 10px 0;
+    color: black;
+}
+
+.textLeft {
+    text-align: left;
+}
+
+.text
 
 .tempDegree {
     font-size: 36px;

@@ -103,7 +103,9 @@ var queryGeocode = function(infoDict, callback) {
 
         res.on('end', function() {
             xml2js.parseString(xmlRes, function(err, result) {
-                return callback(null, result.GeocodeResponse.result[0].geometry[0].location[0]);
+                var location = result.GeocodeResponse.result[0].geometry[0].location[0];
+                location.address = result.GeocodeResponse.result[0].formatted_address[0];
+                return callback(null, location);
             });
         });
 
@@ -124,6 +126,7 @@ var queryForecast = function(infoDict, location, callback) {
 
         res.on('end', function() {
             //let weather = JSON.parse(jsonStr);
+            jsonStr = '{' + '"address":"' + location.address + '",' + jsonStr.substring(1);
             callback(null, jsonStr);
         });
     }).on("error", function(err) {

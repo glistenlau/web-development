@@ -72,7 +72,7 @@ var getDateInfo = function(time) {
     for (var i = 1; i <= 7; i++) {
         var t = new Date(time * 1000);
         t.setDate(t.getDate() + i);
-        var date = {}
+        var date = {};
         date.day = getLiteralDay(t.getDay());
         date.month = getLiteralMonth(t.getMonth());
         date.date = t.getDate();
@@ -131,12 +131,12 @@ var getLiteralMonth = function(month) {
 }
 
 var setNow = function(data, degreeType) {
-    var location = $("input#city").val() + ", " + $("select#state").val();
     var nowInfo = [];
     nowInfo.push(getIcon(data.currently.icon));
-    nowInfo.push(data.currently.summary + " in " + location);
+    nowInfo.push(data.currently.summary + " in " + data.address);
     nowInfo.push(parseInt(data.currently.temperature));
-    nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | L: " + parseInt(data.daily.data[0].temperatureMin) + "º");
+    nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | L: " +
+        parseInt(data.daily.data[0].temperatureMin) + "º");
     nowInfo.push(getPrecipitation(data.currently.precipIntensity));
     nowInfo.push((data.currently.precipProbability * 100) + "%");
     nowInfo.push(parseInt(data.currently.windSpeed) + (degreeType === "us"? " mph": " m/s"));
@@ -172,7 +172,8 @@ var setNextHours = function(data, degreeType) {
         var cloudCover = parseInt(data.hourly.data[i].cloudCover) + "%";
         var temp = data.hourly.data[i].temperature;
         var viewMore = '<a role="button" data-toggle="collapse" href="#hour' + i +
-            '" aria-expanded="false" aria-controls="' + 'hour' + i + '"><span class="glyphicon glyphicon-plus"></span></a>';
+            '" aria-expanded="false" aria-controls="' + 'hour' + i +
+            '"><span class="glyphicon glyphicon-plus"></span></a>';
         table.append("<tr><td>" + time + "</td><td>" + summary + "</td><td>" + cloudCover + "</td><td>" + temp +
             "</td><td>" + viewMore + "</td></tr>");
         var windSpeed = data.hourly.data[i].windSpeed + (degreeType === "us"? " mph": " m/s");
@@ -180,10 +181,11 @@ var setNextHours = function(data, degreeType) {
         var visibility = data.hourly.data[i].visibility + (degreeType === "us"? " mi": " km");
         var pressure = data.hourly.data[i].pressure + (degreeType === "us"? " mb": " hPa");
 
-        table.append('<tr class="collapse well" id="hour' + i + '"><td colspan="5"><table class="table table-hover" style="color: black;">' +
+        table.append('<tr class="collapse well" id="hour' + i +
+            '"><td colspan="5"><table class="table table-hover" style="color: black;">' +
             '<tr><th>Wind</th><th>Humidity</th><th>Visibility</th><th>Pressure</th></tr>' +
-            '<tr><td>' + windSpeed +'</td><td>' + humidity + '</td><td>' + visibility + '</td><td>' + pressure + '</td></tr>' +
-            '</table></td></tr>');
+            '<tr><td>' + windSpeed +'</td><td>' + humidity + '</td><td>' + visibility +
+            '</td><td>' + pressure + '</td></tr></table></td></tr>');
     }
 };
 
@@ -197,23 +199,104 @@ var setNextDays = function(data, degreeType) {
     daysTab.empty();
     daysTab.append(emptyRowBefore);
     for (var i = 1; i <= 7; i++) {
-        var button = $('<button type="button" style="width: 100%" id="day' + i + '"></button>')
-        var row = $("<div></div>")
-        var newRow = $('<div></div>');
-        row.addClass("col-xs-12 col-md-1 daysBlock");
+        // add modal button
+        var button = $('<button type="button" style="width: 100%" id="day' + i +
+            '" data-toggle="modal" data-target="#dayDetail' + i + '"></button>');
+        var row = $('<div class="col-xs-12 col-md-1 daysBlock"></div>');
+        var newRow = $('<div class="row"></div>');
         button.addClass("btn");
-        newRow.addClass("row");
+        // add day infomation
         newRow.append('<div class="daysContent">' + nextSeven[i - 1].day + '</div>');
+        // add date infomation
         newRow.append('<div class="daysContent">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div>');
-        newRow.append('<div class="daysContent"><image height="75px" width="75px" src="' + getIcon(data.daily.data[i].icon) + '"/></div>');
+        // add icon
+        newRow.append('<div class="daysContent"><image height="75px" width="75px" src="' +
+            getIcon(data.daily.data[i].icon) + '"/></div>');
+        // add min temperature
         newRow.append('<div>Min</div>');
         newRow.append('<div class="daysContent">Temp</div>');
         newRow.append('<div class="daysContent tempDegree">' + parseInt(data.daily.data[i].temperatureMin) + 'º</div>');
+        // add max temperature
         newRow.append('<div>Max</div>');
         newRow.append('<div class="daysContent">Temp</div>');
         newRow.append('<div class="daysContent tempDegree">' + parseInt(data.daily.data[i].temperatureMax) + 'º</div>');
+        // attach the information to button
         button.append(newRow);
+
+        var modal = $('<div id="dayDetail' + i + '" role="dialog" aria-labelledby="gridSystemModalLabel">');
+        modal.addClass('modal fade');
+        var modalDialog = $('<div class="modal-dialog" role="document"></div>');
+        var modalContent = $('<div class="modal-content">');
+        var modalHeader = $('<div class="modal-header" style="color: black">');
+
+        // set the modal header
+        modalHeader.append(
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '</button>');
+        modalHeader.append('<h4 class="modal-title modalBlock textLeft" id="gridSystemModalLabel">Weather in ' +
+            data.address + ' on ' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</h4>');
+
+        // set the modal body
+        var modalBody = $('<div class="modal-body"></div>');
+        var modalRow = $('<div class="row"></div>');
+        // add weather icon
+        modalRow.append(
+            '<div class="modalBlock">' +
+            '<image height="200px" width="200px" src="' + getIcon(data.daily.data[i].icon) + '"/>' +
+            '</div>');
+        // add summary
+        modalRow.append(
+            '<div class="modalBlock">' +
+            '<h3>' + nextSeven[i - 1].day + ': <span style="color: #FF9800">' + data.daily.data[i].summary + '</span></h3>' +
+            '</div>');
+        // add surise time
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Sunrise Time</b></div>' +
+            '<div style="color: black">' + getTime(data.daily.data[i].sunriseTime) + '</div>' +
+            '</div>');
+// add sunset time
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Sunset Time</b></div>' +
+            '<div style="color: black">' + getTime(data.daily.data[i].sunsetTime) + '</div>' +
+            '</div>');
+// add humidity
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Humidity</b></div>' +
+            '<div style="color: black">' + data.daily.data[i].humidity + '%' + '</div>' +
+            '</div>');
+// add wind speed
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Wind Speed</b></div>' +
+            '<div style="color: black">' + data.daily.data[i].windSpeed + (degreeType === "us"? " mph": " m/s") + '</div>' +
+            '</div>');
+// add visibility
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Visibility</b></div>' +
+            '<div style="color: black">' + data.daily.data[i].visibility + (degreeType === "us"? " mi": " km") + '</div>' +
+            '</div>');
+// add pressure
+        modalRow.append(
+            '<div class="col-xs-12 col-md-4 modalBlock">' +
+            '<div style="color: black"><b>Pressure</b></div>' +
+            '<div style="color: black">' + data.daily.data[i].pressure + (degreeType === "us"? " mb": " hpa") + '</div>' +
+            '</div>');
+        // append row to modal body
+        modalBody.append(modalRow);
+        // append modal header to modal content
+        modalContent.append(modalHeader);
+        // append modal body to modal content
+        modalContent.append(modalBody);
+        // append modal content to modal dialog
+        modalDialog.append(modalContent);
+        modal.append(modalDialog);
         row.append(button);
+        row.append(modal);
         daysTab.append(row);
     }
     daysTab.append(emptyRowAfter);
@@ -223,11 +306,19 @@ $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
+            var address = data.address.split(',');
+            if (address.length - 2 >=0) {
+                var temp = address[address.length - 2].split(' ');
+                data.address = temp.length > 1? temp[1]: temp[0];
+            }
+            if (address.length - 3 >=0) {
+                data.address = address[address.length - 3].trim() + ", " + data.address;
+            }
             setNow(data, degreeType);
             setNextHours(data, degreeType);
             setNextDays(data, degreeType);
             $(".degreeType").text(degreeType === "us"? "ºF":"ºC");
-            $("div#result").show()
+            $("div#result").css('visibility', 'visible');
         });
     }
 
@@ -259,5 +350,5 @@ $().ready(function() {
 
 var resetResult = function(form) {
     form.reset();
-    $("#result").hide();
-}
+    $("div#result").css('visibility', 'hidden');
+};
