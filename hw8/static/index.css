@@ -56,6 +56,20 @@ label.error {
     padding: 5px 5px 5px 20px;
 }
 
+.daysBlock {
+    margin: 10px -5px 10px -5px;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.tempDegree {
+    font-size: 36px;
+}
+
+.daysContent {
+    margin: 0 0 5px 0;
+}
+
 #nowTemp {
     font-size: 128px;
 }
@@ -77,10 +91,30 @@ label.error {
     background-color: #428BCA;
 }
 
-#days {
-    background-color: #333;
-}
-
 #day1 {
     background-color: #428BCA;
+}
+
+#day2 {
+    background-color: #F44336;
+}
+
+#day3 {
+    background-color: #FF9800;
+}
+
+#day4 {
+    background-color: #CDDC39;
+}
+
+#day5 {
+    background-color: #673AB7;
+}
+
+#day6 {
+    background-color: #FF80AB;
+}
+
+#day7 {
+    background-color: #E91E63;
 }

@@ -189,7 +189,7 @@ var setNextHours = function(data, degreeType) {
 
 var setNextDays = function(data, degreeType) {
     var nextSeven = getDateInfo(data.currently.time);
-    var daysTab = $("#days");
+    var daysTab = $("#daysRow");
     var emptyRowBefore = $("<div></div>")
     var emptyRowAfter = $("<div></div>")
     emptyRowBefore.addClass("hidden-xs col-md-2");
@@ -200,16 +200,15 @@ var setNextDays = function(data, degreeType) {
         var newRow = $('<div id="day' + i + '"></div>');
         row.addClass("col-xs-12 col-md-1");
         newRow.addClass("row daysBlock");
-        newRow.addId
-        newRow.append('<div class="col-xs-12 col-md-12">' + nextSeven[i - 1].day + '</div>');
-        newRow.append('<div class="col-xs-12 col-md-12">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div>');
-        newRow.append('<div class="col-xs-12 col-md-12"><image height="65px" width="65px" src="' + getIcon(data.daily.data[i].icon) + '"/></div>');
+        newRow.append('<div class="col-xs-12 col-md-12 daysContent">' + nextSeven[i - 1].day + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12 daysContent">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div></br></br>');
+        newRow.append('<div class="col-xs-12 col-md-12 daysContent"><image height="65px" width="65px" src="' + getIcon(data.daily.data[i].icon) + '"/></div></br></br>');
         newRow.append('<div class="col-xs-12 col-md-12">Min</div>');
-        newRow.append('<div class="col-xs-12 col-md-12">Temp</div>');
-        newRow.append('<div class="col-xs-12 col-md-12">' + data.daily.data[i].temperatureMin + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12 daysContent">Temp</div></br></br>');
+        newRow.append('<div class="col-xs-12 col-md-12 tempDegree">' + parseInt(data.daily.data[i].temperatureMin) + 'º</div></br></br>');
         newRow.append('<div class="col-xs-12 col-md-12">Max</div>');
-        newRow.append('<div class="col-xs-12 col-md-12">Temp</div>');
-        newRow.append('<div class="col-xs-12 col-md-12">' + data.daily.data[i].temperatureMax + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12 daysContent">Temp</div></br></br>');
+        newRow.append('<div class="col-xs-12 col-md-12 tempDegree">' + parseInt(data.daily.data[i].temperatureMax) + 'º</div>');
         row.append(newRow);
         daysTab.append(row);
     }
