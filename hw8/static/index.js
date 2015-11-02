@@ -194,6 +194,7 @@ var setNextDays = function(data, degreeType) {
     var emptyRowAfter = $("<div></div>")
     emptyRowBefore.addClass("hidden-xs col-md-2");
     emptyRowAfter.addClass("hidden-xs col-md-3");
+    daysTab.empty();
     daysTab.append(emptyRowBefore);
     for (var i = 1; i <= 7; i++) {
         var row = $("<div></div>")
@@ -212,6 +213,7 @@ var setNextDays = function(data, degreeType) {
         row.append(newRow);
         daysTab.append(row);
     }
+    daysTab.append(emptyRowAfter);
 }
 
 $.validator.setDefaults({

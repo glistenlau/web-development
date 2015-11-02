@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7cde0e11-6064-4b60-ac0f-43396988c992" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/index.html" afterPath="$PROJECT_DIR$/hw8/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/static/index.css" afterPath="$PROJECT_DIR$/hw8/static/index.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/static/index.js" afterPath="$PROJECT_DIR$/hw8/static/index.js" />
     </list>
     <ignored path="USC571.iws" />
@@ -92,24 +90,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw8/static/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="198" column="33" selection-start-line="198" selection-start-column="33" selection-end-line="198" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.8006757">
+              <caret line="215" column="34" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
               <folding>
-                <marker date="1446435897000" expanded="true" signature="4728:4914" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="5341:5445" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="5341:5450" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6027:6099" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6027:6190" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6027:6353" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6043:6099" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6044:6099" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6084:6097" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6211:6241" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6211:6293" placeholder="..." />
-                <marker date="1446435897000" expanded="true" signature="6211:6313" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="4728:4914" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="5341:5445" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="5341:5450" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6027:6099" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6027:6190" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6027:6353" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6043:6099" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6044:6099" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6084:6097" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6211:6241" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6211:6293" placeholder="..." />
+                <marker date="1446436353000" expanded="true" signature="6211:6313" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -118,7 +116,7 @@
       <file leaf-file-name="openLayers.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hw8/openLayers.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6896552">
+            <state vertical-scroll-proportion="16.448277">
               <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -127,10 +125,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hw8/static/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5744681">
+            <state vertical-scroll-proportion="-42.068966">
               <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
               <folding />
             </state>
@@ -173,8 +171,8 @@
         <option value="$PROJECT_DIR$/hw8/requestHandler.js" />
         <option value="$PROJECT_DIR$/hw8/openLayers.html" />
         <option value="$PROJECT_DIR$/hw8/index.html" />
-        <option value="$PROJECT_DIR$/hw8/static/index.js" />
         <option value="$PROJECT_DIR$/hw8/static/index.css" />
+        <option value="$PROJECT_DIR$/hw8/static/index.js" />
       </list>
     </option>
   </component>
@@ -434,9 +432,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28233832" sideWeight="0.5250176" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991013" sideWeight="0.4939394" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40298507" sideWeight="0.48092154" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40298507" sideWeight="0.48092154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22952853" sideWeight="0.47498238" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22885571" sideWeight="0.47498238" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41066998" sideWeight="0.4838013" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -848,9 +846,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hw8/static/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-42.068966">
+          <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hw8/openLayers.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6896552">
+        <state vertical-scroll-proportion="16.448277">
           <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -860,30 +866,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hw8/static/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="198" column="33" selection-start-line="198" selection-start-column="33" selection-end-line="198" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.8006757">
+          <caret line="215" column="34" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
           <folding>
-            <marker date="1446435897000" expanded="true" signature="4728:4914" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="5341:5445" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="5341:5450" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6027:6099" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6027:6190" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6027:6353" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6043:6099" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6044:6099" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6084:6097" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6211:6241" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6211:6293" placeholder="..." />
-            <marker date="1446435897000" expanded="true" signature="6211:6313" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="4728:4914" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="5341:5445" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="5341:5450" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6027:6099" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6027:6190" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6027:6353" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6043:6099" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6044:6099" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6084:6097" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6211:6241" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6211:6293" placeholder="..." />
+            <marker date="1446436353000" expanded="true" signature="6211:6313" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hw8/static/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5744681">
-          <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
