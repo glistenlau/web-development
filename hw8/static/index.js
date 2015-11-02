@@ -197,20 +197,23 @@ var setNextDays = function(data, degreeType) {
     daysTab.empty();
     daysTab.append(emptyRowBefore);
     for (var i = 1; i <= 7; i++) {
+        var button = $('<button type="button" style="width: 100%" id="day' + i + '"></button>')
         var row = $("<div></div>")
-        var newRow = $('<div id="day' + i + '"></div>');
-        row.addClass("col-xs-12 col-md-1");
-        newRow.addClass("row daysBlock");
-        newRow.append('<div class="col-xs-12 col-md-12 daysContent">' + nextSeven[i - 1].day + '</div>');
-        newRow.append('<div class="col-xs-12 col-md-12 daysContent">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div></br></br>');
-        newRow.append('<div class="col-xs-12 col-md-12 daysContent"><image height="65px" width="65px" src="' + getIcon(data.daily.data[i].icon) + '"/></div></br></br>');
-        newRow.append('<div class="col-xs-12 col-md-12">Min</div>');
-        newRow.append('<div class="col-xs-12 col-md-12 daysContent">Temp</div></br></br>');
-        newRow.append('<div class="col-xs-12 col-md-12 tempDegree">' + parseInt(data.daily.data[i].temperatureMin) + 'º</div></br></br>');
-        newRow.append('<div class="col-xs-12 col-md-12">Max</div>');
-        newRow.append('<div class="col-xs-12 col-md-12 daysContent">Temp</div></br></br>');
-        newRow.append('<div class="col-xs-12 col-md-12 tempDegree">' + parseInt(data.daily.data[i].temperatureMax) + 'º</div>');
-        row.append(newRow);
+        var newRow = $('<div></div>');
+        row.addClass("col-xs-12 col-md-1 daysBlock");
+        button.addClass("btn");
+        newRow.addClass("row");
+        newRow.append('<div class="daysContent">' + nextSeven[i - 1].day + '</div>');
+        newRow.append('<div class="daysContent">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div>');
+        newRow.append('<div class="daysContent"><image height="75px" width="75px" src="' + getIcon(data.daily.data[i].icon) + '"/></div>');
+        newRow.append('<div>Min</div>');
+        newRow.append('<div class="daysContent">Temp</div>');
+        newRow.append('<div class="daysContent tempDegree">' + parseInt(data.daily.data[i].temperatureMin) + 'º</div>');
+        newRow.append('<div>Max</div>');
+        newRow.append('<div class="daysContent">Temp</div>');
+        newRow.append('<div class="daysContent tempDegree">' + parseInt(data.daily.data[i].temperatureMax) + 'º</div>');
+        button.append(newRow);
+        row.append(button);
         daysTab.append(row);
     }
     daysTab.append(emptyRowAfter);
