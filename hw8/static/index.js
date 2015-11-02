@@ -67,6 +67,69 @@ var getTime = function(time) {
     return ("00" + ansHour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + ansSign;
 };
 
+var getDateInfo = function(time) {
+    var nextSeven = [];
+    for (var i = 1; i <= 7; i++) {
+        var t = new Date(time * 1000);
+        t.setDate(t.getDate() + i);
+        var date = {}
+        date.day = getLiteralDay(t.getDay());
+        date.month = getLiteralMonth(t.getMonth());
+        date.date = t.getDate();
+        nextSeven.push(date);
+    }
+
+    return nextSeven;
+};
+
+var getLiteralDay = function(day) {
+    switch (day) {
+        case 0:
+            return "Sunday";
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday";
+    };
+};
+
+var getLiteralMonth = function(month) {
+    switch (month) {
+        case 0:
+            return "Jan";
+        case 1:
+            return "Feb";
+        case 2:
+            return "Mar";
+        case 3:
+            return "Apr";
+        case 4:
+            return "May";
+        case 5:
+            return "Jun";
+        case 6:
+            return "Jul";
+        case 7:
+            return "Aug";
+        case 8:
+            return "Sep";
+        case 9:
+            return "Oct";
+        case 10:
+            return "Nov";
+        case 11:
+            return "Dec";
+    }
+}
+
 var setNow = function(data, degreeType) {
     var location = $("input#city").val() + ", " + $("select#state").val();
     var nowInfo = [];
@@ -124,12 +187,41 @@ var setNextHours = function(data, degreeType) {
     }
 };
 
+var setNextDays = function(data, degreeType) {
+    var nextSeven = getDateInfo(data.currently.time);
+    var daysTab = $("#days");
+    var emptyRowBefore = $("<div></div>")
+    var emptyRowAfter = $("<div></div>")
+    emptyRowBefore.addClass("hidden-xs col-md-2");
+    emptyRowAfter.addClass("hidden-xs col-md-3");
+    daysTab.append(emptyRowBefore);
+    for (var i = 1; i <= 7; i++) {
+        var row = $("<div></div>")
+        var newRow = $('<div id="day' + i + '"></div>');
+        row.addClass("col-xs-12 col-md-1");
+        newRow.addClass("row daysBlock");
+        newRow.addId
+        newRow.append('<div class="col-xs-12 col-md-12">' + nextSeven[i - 1].day + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">' + nextSeven[i - 1].month + ' ' + nextSeven[i - 1].date + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12"><image height="65px" width="65px" src="' + getIcon(data.daily.data[i].icon) + '"/></div>');
+        newRow.append('<div class="col-xs-12 col-md-12">Min</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">Temp</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">' + data.daily.data[i].temperatureMin + '</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">Max</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">Temp</div>');
+        newRow.append('<div class="col-xs-12 col-md-12">' + data.daily.data[i].temperatureMax + '</div>');
+        row.append(newRow);
+        daysTab.append(row);
+    }
+}
+
 $.validator.setDefaults({
     submitHandler: function() {
         $.get("/api/weather", $("form#searchForm").serialize(), function(data) {
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             setNow(data, degreeType);
             setNextHours(data, degreeType);
+            setNextDays(data, degreeType);
             $(".degreeType").text(degreeType === "us"? "ºF":"ºC");
             $("div#result").show()
         });
