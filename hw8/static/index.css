@@ -14,6 +14,10 @@ th {
     text-align: center;
 }
 
+label.error {
+    color: red;
+}
+
 .required {
     color: red;
 }
@@ -24,12 +28,11 @@ th {
 }
 
 #search {
-    background: #000;
     background-color: rgba(0,0,0,0.3);
-
     margin: 5% 5% 0 5%;
     padding: 2%;
 }
+
 .row.no-gutter {
     margin-left: 0;
     margin-right: 0;
@@ -46,24 +49,30 @@ th {
     background-color: pink;
     padding: 5px 5px 5px 20px;
 }
+
 .even {
     color: black;
     background-color: white;
     padding: 5px 5px 5px 20px;
 }
+
 #nowTemp {
     font-size: 128px;
 }
+
 #resultTab li a {
     background-color: whitesmoke;
 }
+
 #resultTab li.active a {
     background-color: #428BCA;
     color: white;
 }
+
 #map {
    height: 460px;
 }
+
 #nextHoursTH {
     background-color: #428BCA;
 }
