@@ -278,7 +278,9 @@ var setNextDays = function (data, degreeType) {
         // add summary
         modalRow.append(
             '<div class="modalBlock">' +
-            '<h3>' + nextSeven[i - 1].day + ': <span style="color: #FF9800">' + data.daily.data[i].summary + '</span></h3>' +
+            '<h3>' + nextSeven[i - 1].day + ': ' +
+            '<span style="color: #FF9800">' + data.daily.data[i].summary + '</span>' +
+            '</h3>' +
             '</div>');
         // add surise time
         modalRow.append(
@@ -286,35 +288,41 @@ var setNextDays = function (data, degreeType) {
             '<div style="color: black"><b>Sunrise Time</b></div>' +
             '<div style="color: black">' + getTime(data.daily.data[i].sunriseTime) + '</div>' +
             '</div>');
-// add sunset time
+        // add sunset time
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Sunset Time</b></div>' +
             '<div style="color: black">' + getTime(data.daily.data[i].sunsetTime) + '</div>' +
             '</div>');
-// add humidity
+        // add humidity
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Humidity</b></div>' +
             '<div style="color: black">' + data.daily.data[i].humidity + '%' + '</div>' +
             '</div>');
-// add wind speed
+        // add wind speed
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Wind Speed</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].windSpeed + (degreeType === "us" ? " mph" : " m/s") + '</div>' +
+            '<div style="color: black">' +
+            data.daily.data[i].windSpeed + (degreeType === "us" ? " mph" : " m/s") +
+            '</div>' +
             '</div>');
-// add visibility
+        // add visibility
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Visibility</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].visibility + (degreeType === "us" ? " mi" : " km") + '</div>' +
+            '<div style="color: black">' +
+            data.daily.data[i].visibility + (degreeType === "us" ? " mi" : " km") +
+            '</div>' +
             '</div>');
 // add pressure
         modalRow.append(
             '<div class="col-xs-12 col-md-4 modalBlock">' +
             '<div style="color: black"><b>Pressure</b></div>' +
-            '<div style="color: black">' + data.daily.data[i].pressure + (degreeType === "us" ? " mb" : " hpa") + '</div>' +
+            '<div style="color: black">' +
+            data.daily.data[i].pressure + (degreeType === "us" ? " mb" : " hpa") +
+            '</div>' +
             '</div>');
         // append row to modal body
         modalBody.append(modalRow);
@@ -330,13 +338,16 @@ var setNextDays = function (data, degreeType) {
         daysTab.append(row);
     }
     daysTab.append(emptyRowAfter);
-}
+};
 
+// handle form submit
 $.validator.setDefaults({
     submitHandler: function () {
         $.get("/api/weather", $("form#searchForm").serialize(), function (data) {
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             var address = data.address.split(',');
+
+            // get the location information
             if (address.length - 2 >= 0) {
                 var temp = address[address.length - 2].split(' ');
                 data.address = temp.length > 1 ? temp[1] : temp[0];
@@ -344,16 +355,21 @@ $.validator.setDefaults({
             if (address.length - 3 >= 0) {
                 data.address = address[address.length - 3].trim() + ", " + data.address;
             }
+
+            // set three tabs
             setNow(data, degreeType);
             setNextHours(data, degreeType);
             setNextDays(data, degreeType);
             $(".degreeType").text(degreeType === "us" ? "ºF" : "ºC");
+
+            // make the result visible
             $("div#result").css('visibility', 'visible');
         });
     }
 
 });
 
+// add the validation rule for white space input
 $.validator.addMethod("noEmptyInput", function (value, element, params) {
     value = value.trim();
     if (value.length < 1) {
@@ -363,6 +379,7 @@ $.validator.addMethod("noEmptyInput", function (value, element, params) {
     return true;
 });
 
+// check the validation of form
 $().ready(function () {
     $("#searchForm").validate({
         rules: {
@@ -378,6 +395,7 @@ $().ready(function () {
     });
 });
 
+// reset the form and result
 var resetResult = function (form) {
     form.reset();
     $("div#result").css('visibility', 'hidden');

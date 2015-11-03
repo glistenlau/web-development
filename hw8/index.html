@@ -9,13 +9,48 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
-    <script src="http://openlayers.org/en/v3.10.1/build/ol.js"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="/static/index.js"></script>
 
     <title>Forecast Search</title>
 </head>
 <body>
+
+<!--facebook SDK-->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '886824564747949',
+            xfbml      : true,
+            version    : 'v2.5'
+        });
+        FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.likes',
+            action_properties: JSON.stringify({
+                object:'https://developers.facebook.com/docs/',
+            })
+        }, function(response){
+            // Debug response (optional)
+            console.log(response);
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+</div>
+
 <h2 align="center">Forecast Search</h2>
 <div id="search">
     <form name="searchForm" id="searchForm" role="form" action="javascript:alert('success!')" method="get">
@@ -149,10 +184,15 @@
                                 </div>
                                 <div clearfix></div>
                                 <div class="col-xs-12 col-md-12">
-                                    <span id="nowTemp" style="text-align: center">70</span><span class="degreeType" style="position: relative; top: -72px; font-size: 24px"></span>
+                                    <span id="nowTemp" style="text-align: center">70</span>
+                                    <span class="degreeType" style="position: relative;top: -72px;font-size: 24px"></span>
                                 </div>
                                 <div class="col-xs-12 col-md-12" style="vertical-align: bottom">
                                     <span id="nowRange">LH</span>
+                                    <a href="#">
+                                        <image src="/static/images/fb_icon.png" align="right" height="30px" width="30px"
+                                               style="position: relative;bottom: 12px"/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
