@@ -134,7 +134,7 @@ var getLiteralMonth = function (month) {
 var setNow = function (data, degreeType) {
     var nowInfo = [];
     nowInfo.push(getIcon(data.currently.icon));
-    nowInfo.push(data.currently.summary + " in " + data.address);
+    nowInfo.push(" in " + data.address);
     nowInfo.push(parseInt(data.currently.temperature));
     nowInfo.push("H: " + parseInt(data.daily.data[0].temperatureMax) + "º | L: " +
         parseInt(data.daily.data[0].temperatureMin) + "º");
@@ -147,6 +147,7 @@ var setNow = function (data, degreeType) {
     nowInfo.push(getTime(data.daily.data[0].sunriseTime));
     nowInfo.push(getTime(data.daily.data[0].sunsetTime));
     $("#nowIcon").attr("src", nowInfo[0]);
+    $("#nowSummary").text(data.currently.summary);
     $("#nowLocation").text(nowInfo[1]);
     $("#nowTemp").text(nowInfo[2]);
     $("#nowRange").text(nowInfo[3]);
@@ -380,7 +381,7 @@ $.validator.addMethod("noEmptyInput", function (value, element, params) {
 });
 
 // check the validation of form
-$().ready(function () {
+$(document).ready(function () {
     $("#searchForm").validate({
         rules: {
             streetAddress: "noEmptyInput",
@@ -393,10 +394,35 @@ $().ready(function () {
             state: "Please select a state"
         }
     });
+
+    // load facebook SDK
+    $.ajaxSetup({ cache: true });
+    $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+        FB.init({
+            appId      : '886824564747949',
+            xfbml      : true,
+            version    : 'v2.5'
+        });
+    });
 });
 
 // reset the form and result
 var resetResult = function (form) {
     form.reset();
     $("div#result").css('visibility', 'hidden');
+};
+
+// post current weato facebook
+var fbPost = function() {
+    FB.ui({
+        method: 'feed',
+        link: 'http://forecast.io/',
+        name: 'Current Weather' + $('#nowLocation').text(),
+        picture: $('#nowIcon').prop('src'),
+        description: $('#nowSummary').text() + ' ' + $('#nowTemp').text() + $('.degreeType').text().substring(0, 2),
+        caption: 'WEATHER INFOMATION FROM FORECAST.IO',
+    }, function(response){
+        // Debug response (optional)
+        console.log(response);
+    });
 };

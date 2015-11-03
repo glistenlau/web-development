@@ -11,46 +11,15 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="/static/index.js"></script>
+    <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="When Great Minds Don’t Think Alike" />
+    <meta property="og:description"        content="How much does culture influence creative thinking?" />
+    <meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
 
     <title>Forecast Search</title>
 </head>
 <body>
-
-<!--facebook SDK-->
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '886824564747949',
-            xfbml      : true,
-            version    : 'v2.5'
-        });
-        FB.ui({
-            method: 'share_open_graph',
-            action_type: 'og.likes',
-            action_properties: JSON.stringify({
-                object:'https://developers.facebook.com/docs/',
-            })
-        }, function(response){
-            // Debug response (optional)
-            console.log(response);
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-<div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
-</div>
-
 <h2 align="center">Forecast Search</h2>
 <div id="search">
     <form name="searchForm" id="searchForm" role="form" action="javascript:alert('success!')" method="get">
@@ -179,8 +148,8 @@
                         <!--For the temperature information-->
                         <div class="col-xs-12 col-md-6" align="center">
                             <div class="row">
-                                <div id="nowLocation" class="col-md-12">
-                                    Location
+                                <div>
+                                    <span id="nowSummary"></span><span id="nowLocation"></span>
                                 </div>
                                 <div clearfix></div>
                                 <div class="col-xs-12 col-md-12">
@@ -189,7 +158,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-12" style="vertical-align: bottom">
                                     <span id="nowRange">LH</span>
-                                    <a href="#">
+                                    <a href="javascript:return false;" onclick="fbPost()">
                                         <image src="/static/images/fb_icon.png" align="right" height="30px" width="30px"
                                                style="position: relative;bottom: 12px"/>
                                     </a>
