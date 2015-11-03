@@ -1,0 +1,16 @@
+{
+  "name": "forecast",
+  "version": "1.0.0",
+  "description": "weather forecast severice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "weather",
+    "forecast"
+  ],
+  "author": "Yi Liu",
+  "license": "ISC"
+}
