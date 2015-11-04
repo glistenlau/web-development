@@ -345,7 +345,7 @@ var setNextDays = function (data, degreeType) {
 // handle form submit
 $.validator.setDefaults({
     submitHandler: function () {
-        $.get("forecast/api/weather", $("form#searchForm").serialize(), function (data) {
+        $.get("/forecast/api/weather", $("form#searchForm").serialize(), function (data) {
             $("div#result").css('display', 'block');
             if (map === null) {
                 mapInit();

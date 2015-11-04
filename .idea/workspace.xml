@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cde0e11-6064-4b60-ac0f-43396988c992" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/index.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/clear.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/clear_night.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/cloud_day.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/cloud_night.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/cloudy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/fb_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/fog.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/forecast_logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/rain.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/sleet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/snow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/images/wind.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/index.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8/static/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hw8 2.zip" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8.zip" afterPath="$PROJECT_DIR$/hw8.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/app.js" afterPath="$PROJECT_DIR$/hw8/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/index.html" afterPath="$PROJECT_DIR$/hw8/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8/requestHandler.js" afterPath="$PROJECT_DIR$/hw8/requestHandler.js" />
     </list>
     <ignored path="USC571.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw8/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="1.1974111">
               <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
               <folding />
             </state>
@@ -72,10 +55,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hw8/forecast/static/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33557048">
+            <state vertical-scroll-proportion="100.74074">
               <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
               <folding>
                 <marker date="1446609857000" expanded="true" signature="6353:6366" placeholder="..." />
@@ -404,11 +387,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20648344" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5620347" sideWeight="0.5637773" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19851117" sideWeight="0.5405215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991013" sideWeight="0.4939394" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5620347" sideWeight="0.4362227" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5620347" sideWeight="0.4362227" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19878297" sideWeight="0.4623486" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19851117" sideWeight="0.4594785" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40818858" sideWeight="0.4728682" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -735,14 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hw8/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hw8/requestHandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -761,7 +736,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hw8/forecast/static/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33557048">
+        <state vertical-scroll-proportion="100.74074">
           <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
           <folding>
             <marker date="1446609857000" expanded="true" signature="6353:6366" placeholder="..." />
@@ -781,6 +756,14 @@
             <marker date="1446609857000" expanded="true" signature="11798:11810" placeholder="..." />
             <marker date="1446609857000" expanded="true" signature="11862:11874" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hw8/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1974111">
+          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
