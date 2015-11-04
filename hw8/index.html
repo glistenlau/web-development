@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/static/index.css" />
+    <link rel="stylesheet" href="/forecast/static/index.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
-    <script src="/static/index.js"></script>
+    <script src="/forecast/static/index.js"></script>
 
     <title>Forecast Search</title>
 </head>
@@ -112,7 +112,7 @@
                     <div class="col-xs-12 col-md-12">
                         <span>Powered by: </span>
                         <a href="http://forecast.io">
-                            <image height="48px" src="/static/images/forecast_logo.png"></image>
+                            <image height="48px" src="/forecast/static/images/forecast_logo.png"></image>
                         </a>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
 
 <hr style="margin: 2% 4% 2% 4%;"/>
 
-<div id="result" style="margin: 0 5% 5% 5%;visibility: hidden">
+<div id="result" style="margin: 0 5% 5% 5%;display: none">
     <ul class="nav nav-tabs" id="resultTab">
         <li class="active"><a data-toggle="tab" href="#now">Right Now</a></li>
         <li><a data-toggle="tab" href="#hours">Next 24 hours</a></li>
@@ -138,7 +138,7 @@
                     <div class="row" style="background-color: #D46A6A">
                         <!--For the weather icon-->
                         <div class="col-xs-12 col-md-6" align="center" style="padding: 10px">
-                            <image id="nowIcon" src="/static/images/clear.png" width="180px" height="180px"></image>
+                            <image id="nowIcon" src="/forecast/static/images/clear.png" width="180px" height="180px"></image>
                         </div>
                         <!--For the temperature information-->
                         <div class="col-xs-12 col-md-6" align="center">
@@ -154,7 +154,7 @@
                                 <div class="col-xs-12 col-md-12" style="vertical-align: bottom">
                                     <span id="nowRange">LH</span>
                                     <a href="javascript:return false;" onclick="fbPost()">
-                                        <image src="/static/images/fb_icon.png" align="right" height="30px" width="30px"
+                                        <image src="/forecast/static/images/fb_icon.png" align="right" height="30px" width="30px"
                                                style="position: relative;bottom: 12px"/>
                                     </a>
                                 </div>
@@ -184,6 +184,7 @@
                 </div>
                 <div id="map" class="col-xs-12 col-md-6">
                 </div>
+
             </div>
 
         </div>
@@ -204,41 +205,6 @@
     </div>
 </div>
 
-<!--initiate map-->
-<script>
-    //Center of map
-    var lonlat = new OpenLayers.LonLat(0, 0);
-
-    var map = new OpenLayers.Map({
-        div: "map",
-        center: lonlat.transform('EPSG:4326', 'EPSG:3857'),
-    });
-    // Create OSM overlays
-    var mapnik = new OpenLayers.Layer.OSM();
-
-    var layer_cloud = new OpenLayers.Layer.XYZ(
-            "clouds",
-            "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
-            {
-                isBaseLayer: false,
-                opacity: 0.7,
-                sphericalMercator: true
-            }
-    );
-
-    var layer_precipitation = new OpenLayers.Layer.XYZ(
-            "precipitation",
-            "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
-            {
-                isBaseLayer: false,
-                opacity: 0.7,
-                sphericalMercator: true
-            }
-    );
-
-
-    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
-</script>
 
 </body>
 </html>

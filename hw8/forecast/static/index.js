@@ -1,8 +1,9 @@
 /**
  * Created by YiLIU on 10/28/15.
  */
+
 var getIcon = function (icon) {
-    var path = "/static/images/";
+    var path = "/forecast/static/images/";
     switch (icon) {
         case "clear-day":
             return path + "clear.png";
@@ -344,7 +345,11 @@ var setNextDays = function (data, degreeType) {
 // handle form submit
 $.validator.setDefaults({
     submitHandler: function () {
-        $.get("/api/weather", $("form#searchForm").serialize(), function (data) {
+        $.get("forecast/api/weather", $("form#searchForm").serialize(), function (data) {
+            $("div#result").css('display', 'block');
+            if (map === null) {
+                mapInit();
+            }
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             var address = data.address.split(',');
 
@@ -364,7 +369,6 @@ $.validator.setDefaults({
             $(".degreeType").text(degreeType === "us" ? "ºF" : "ºC");
 
             // make the result visible
-            $("div#result").css('visibility', 'visible');
         });
     }
 
@@ -380,6 +384,7 @@ $.validator.addMethod("noEmptyInput", function (value, element, params) {
     return true;
 });
 
+var map = null;
 // check the validation of form
 $(document).ready(function () {
     $("#searchForm").validate({
@@ -406,10 +411,43 @@ $(document).ready(function () {
     });
 });
 
+var mapInit = function() {
+    var lonlat = new OpenLayers.LonLat(0, 0);
+
+    map = new OpenLayers.Map({
+        div: "map",
+        center: lonlat.transform('EPSG:4326', 'EPSG:3857'),
+    });
+    // Create OSM overlays
+    var mapnik = new OpenLayers.Layer.OSM();
+
+    var layer_cloud = new OpenLayers.Layer.XYZ(
+        "clouds",
+        "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
+        {
+            isBaseLayer: false,
+            opacity: 0.7,
+            sphericalMercator: true
+        }
+    );
+
+    var layer_precipitation = new OpenLayers.Layer.XYZ(
+        "precipitation",
+        "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
+        {
+            isBaseLayer: false,
+            opacity: 0.7,
+            sphericalMercator: true
+        }
+    );
+
+
+    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
+};
 // reset the form and result
 var resetResult = function (form) {
     form.reset();
-    $("div#result").css('visibility', 'hidden');
+    $("div#result").css('display', 'none');
 };
 
 // post current weato facebook

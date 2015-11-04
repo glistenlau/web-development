@@ -134,32 +134,6 @@ var queryForecast = function(infoDict, location, callback) {
     });
 };
 
-var showHTML = function(infoDict, weather, callback) {
-    fs.readFile("./weather.html", "utf-8", function(err, data) {
-        if (err) {
-            return callback(err);
-        }
-        let icon = getIcon(weather.currently.icon);
-        //noinspection JSValidateTypes
-        let temperature = weather.currently.temperature + (infoDict.degreeType === "us"? " Fº": " Cº");
-        let condition = weather.currently.summary;
-
-        let e = [
-            getPrecipitation(weather.currently.precipIntensity),
-            (weather.currently.precipProbability * 100) + "%",
-            parseInt(weather.currently.windSpeed) + "mph",
-            parseInt(weather.currently.dewPoint),
-            (weather.currently.humidity * 100) + "%",
-            parseInt(weather.currently.visibility) + "mi",
-            getTime(weather.daily.data[0].sunriseTime),
-            getTime(weather.daily.data[0].sunsetTime)
-        ];
-
-        let HTML = String.format(data, e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], icon, condition, temperature);
-        return callback(null, HTML);
-    });
-};
-
 var getPrecipitation = function(pi) {
     if (pi === 0) {
         return "None";
@@ -181,22 +155,6 @@ var getTime = function(time) {
     let sign = t.getHours() >= 12? "PM": "AM";
 
     return ("00" + hour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + sign;
-};
-
-var getIcon = function(icon) {
-    switch(icon) {
-        case "clear-day": return "/images/clear.png";
-        case "clear-night": return "/images/clear_night.png";
-        case "rain": return "/images/rain.png";
-        case "snow": return "/images/snow.png";
-        case "sleet": return "/images/sleet.png";
-        case "wind": return "/images/wind.png";
-        case "fog": return "/images/fog.png";
-        case "cloudy": return "/images/cloudy.png";
-        case "partly-cloudy-day": return "/images/cloud_day.png";
-        case "partly-cloudy-night": return "images/cloud_night.png";
-        default: return "/#";
-    }
 };
 
 String.format = function(src){

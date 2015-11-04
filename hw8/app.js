@@ -9,12 +9,12 @@ var url = require('url');
 var http = require('http');
 var requestHandler = require('./requestHandler');
 
-const PORT = 8000;
+const PORT = process.env.PORT || 3000;
 
 var server = http.createServer(function (request, response) {
     let pathname = url.parse(request.url).pathname;
     let queries = url.parse(request.url).query;
-    if (pathname === "/" && (queries == null || queries.length == 0)) {
+    if (pathname === "/forecast" && (queries == null || queries.length == 0)) {
         requestHandler.handleHome(function(err, html) {
             if (err) {
                 return console.error(err);
@@ -23,7 +23,7 @@ var server = http.createServer(function (request, response) {
             response.write(html);
             response.end();
         });
-    } else if (pathname === "/api/weather") {
+    } else if (pathname === "/forecast/api/weather") {
         requestHandler.handleQuery(queries, function(err, weather) {
             if (err) {
                 return console.error(err);
