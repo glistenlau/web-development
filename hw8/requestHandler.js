@@ -4,11 +4,27 @@
 
 'use strict';
 
-const GOOGLE_KEY= "AIzaSyDdhosspZ6NYYHaBIDtMsLtPBGD-j5FRGU";
+let GOOGLE_KEY;
+let FORECAST_KEY;
 var fs = require('fs');
 var https = require('https');
 var xml2js = require('xml2js');
 var querystring = require('querystring');
+
+var readKeys = function(callback) {
+    fs.readFile('./keys.json', function(err, data) {
+        if (err) {
+            console.log(err);
+        }
+
+        return callback(null, JSON.parse(data));
+    })
+};
+
+readKeys(function(err, keys) {
+    GOOGLE_KEY = keys.GOOGLE_KEY;
+    FORECAST_KEY = keys.FORECAST_KEY;
+});
 
 exports.handleStatic = function(pathname, callback) {
         let postfix = pathname.substring(pathname.indexOf(".") + 1);
@@ -115,7 +131,7 @@ var queryGeocode = function(infoDict, callback) {
 };
 
 var queryForecast = function(infoDict, location, callback) {
-    let fcUrl = "https://api.forecast.io/forecast/473660d9a99fc4416b3d36a8a93b7ad7/" + location.lat[0] + "," +
+    let fcUrl = "https://api.forecast.io/forecast/" + FORECAST_KEY + "/" + location.lat[0] + "," +
         location.lng[0] + "?units=" + infoDict.degreeType + "&exclude=flags";
     let jsonStr = "";
     https.get(fcUrl, function(res) {

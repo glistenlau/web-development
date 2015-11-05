@@ -46,6 +46,14 @@ var server = http.createServer(function (request, response) {
     }
 });
 
+function readKeys() {
+    return new Promise(function(resolve, reject) {
+
+    })
+}
+
+
+
 server.listen(PORT);
 console.log("Server runing at port: " + PORT + ".");
 
