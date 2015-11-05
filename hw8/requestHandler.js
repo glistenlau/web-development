@@ -79,14 +79,6 @@ exports.handleQuery = function(queries, callback) {
                     return callback(err);
                 }
 
-                //showHTML(infoDict, weather, function(err, HTML) {
-                //    if (err) {
-                //        return callback(err);
-                //    }
-                //
-                //    return callback(null, HTML);
-                //});
-
                 return callback(null, weather);
             });
         });
@@ -148,29 +140,6 @@ var queryForecast = function(infoDict, location, callback) {
     }).on("error", function(err) {
         return callback(err);
     });
-};
-
-var getPrecipitation = function(pi) {
-    if (pi === 0) {
-        return "None";
-    } else if (pi === 0.002) {
-        return "Very Light";
-    } else if (pi === 0.017) {
-        return "Light";
-    } else if (pi === 0.1) {
-        return "Moderate";
-    } else {
-        return "Heavy";
-    }
-};
-
-var getTime = function(time) {
-    let t = new Date(time * 1000);
-    let hour = t.getHours() > 12? t.getHours() - 12: t.getHours();
-    let minute = t.getMinutes();
-    let sign = t.getHours() >= 12? "PM": "AM";
-
-    return ("00" + hour).slice(-2) + ": " + ("00" + minute).slice(-2) + " " + sign;
 };
 
 String.format = function(src){
