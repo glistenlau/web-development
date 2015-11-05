@@ -12,7 +12,7 @@ var xml2js = require('xml2js');
 var querystring = require('querystring');
 
 var readKeys = function(callback) {
-    fs.readFile('./keys.json', function(err, data) {
+    fs.readFile('./exclude/keys.json', function(err, data) {
         if (err) {
             console.log(err);
         }
