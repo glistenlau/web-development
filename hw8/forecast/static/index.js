@@ -147,6 +147,8 @@ var setNow = function (data, degreeType) {
     nowInfo.push(parseInt(data.currently.visibility) + (degreeType === "us" ? " mi" : " km"));
     nowInfo.push(getTime(data.daily.data[0].sunriseTime));
     nowInfo.push(getTime(data.daily.data[0].sunsetTime));
+
+    $("div#result").css('display', 'block');
     $("#nowIcon").attr("src", nowInfo[0]);
     $("#nowSummary").text(data.currently.summary);
     $("#nowLocation").text(nowInfo[1]);
@@ -160,6 +162,9 @@ var setNow = function (data, degreeType) {
     $("#nowVisibility").text(nowInfo[9]);
     $("#nowSunrise").text(nowInfo[10]);
     $("#nowSunset").text(nowInfo[11]);
+    if (map === null) {
+        mapInit();
+    }
     lonlat = new OpenLayers.LonLat(data.longitude, data.latitude);
     map.setCenter(lonlat.transform('EPSG:4326', 'EPSG:3857'), 10);
 };
@@ -346,10 +351,7 @@ var setNextDays = function (data, degreeType) {
 $.validator.setDefaults({
     submitHandler: function () {
         $.get("/forecast/api/weather", $("form#searchForm").serialize(), function (data) {
-            $("div#result").css('display', 'block');
-            if (map === null) {
-                mapInit();
-            }
+
             var degreeType = $("input[name=degreeType]:checked", "#searchForm").val();
             var address = data.address.split(',');
 
